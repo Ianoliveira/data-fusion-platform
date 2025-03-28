@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import Integrations from "./pages/Integrations";
 import SmartInsights from "./pages/SmartInsights";
 import Customers from "./pages/Customers";
+import PredictiveModels from "./pages/PredictiveModels";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="insights" element={<SmartInsights />} />
             <Route path="integrations" element={<Integrations />} />
             <Route path="customers" element={<Customers />} />
+            <Route path="predictive-models" element={<PredictiveModels />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
