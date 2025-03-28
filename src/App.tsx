@@ -11,6 +11,7 @@ import Integrations from "./pages/Integrations";
 import SmartInsights from "./pages/SmartInsights";
 import Customers from "./pages/Customers";
 import PredictiveModels from "./pages/PredictiveModels";
+import Chatbot from "./pages/Chatbot";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="integrations" element={<Integrations />} />
             <Route path="customers" element={<Customers />} />
             <Route path="predictive-models" element={<PredictiveModels />} />
+            <Route path="chatbot" element={<Chatbot />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
