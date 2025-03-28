@@ -9,6 +9,7 @@ import { DashboardLayout } from "./components/layout/DashboardLayout";
 import Index from "./pages/Index";
 import Integrations from "./pages/Integrations";
 import SmartInsights from "./pages/SmartInsights";
+import Customers from "./pages/Customers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route index element={<Index />} />
             <Route path="insights" element={<SmartInsights />} />
             <Route path="integrations" element={<Integrations />} />
+            <Route path="customers" element={<Customers />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
