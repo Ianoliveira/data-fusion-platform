@@ -354,18 +354,135 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
-// Add the missing chart components from recharts
-const AreaChart: React.FC<React.ComponentProps<typeof RechartsPrimitive.AreaChart>> = (props) => {
-  return <RechartsPrimitive.AreaChart {...props} />
+// Create proper wrapper components for recharts with correct props
+interface CustomChartProps {
+  data: any[];
+  index?: string;
+  className?: string;
+  valueFormatter?: (value: any) => string;
+  colors?: string[];
+  showLegend?: boolean;
+  showXAxis?: boolean;
+  showYAxis?: boolean;
+  showGridLines?: boolean;
 }
 
-const BarChart: React.FC<React.ComponentProps<typeof RechartsPrimitive.BarChart>> = (props) => {
-  return <RechartsPrimitive.BarChart {...props} />
+// Area Chart with correct props
+interface AreaChartProps extends CustomChartProps {
+  categories: string[];
 }
 
-const PieChart: React.FC<React.ComponentProps<typeof RechartsPrimitive.PieChart>> = (props) => {
-  return <RechartsPrimitive.PieChart {...props} />
+export const AreaChart: React.FC<AreaChartProps> = ({
+  data,
+  categories,
+  index = "name",
+  colors = ["#3b82f6"],
+  valueFormatter = (value) => value.toString(),
+  className,
+  showLegend = true,
+  showXAxis = true,
+  showYAxis = true,
+  showGridLines = true,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.AreaChart data={data}>
+        {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />}
+        {showXAxis && <RechartsPrimitive.XAxis dataKey={index} />}
+        {showYAxis && <RechartsPrimitive.YAxis />}
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        {showLegend && <RechartsPrimitive.Legend />}
+        {categories.map((category, i) => (
+          <RechartsPrimitive.Area
+            key={category}
+            type="monotone"
+            dataKey={category}
+            stroke={colors[i % colors.length]}
+            fill={colors[i % colors.length]}
+            fillOpacity={0.2}
+          />
+        ))}
+      </RechartsPrimitive.AreaChart>
+    </ChartContainer>
+  );
+};
+
+// Bar Chart with correct props
+interface BarChartProps extends CustomChartProps {
+  categories: string[];
 }
+
+export const BarChart: React.FC<BarChartProps> = ({
+  data,
+  categories,
+  index = "name",
+  colors = ["#3b82f6"],
+  valueFormatter = (value) => value.toString(),
+  className,
+  showLegend = true,
+  showXAxis = true,
+  showYAxis = true,
+  showGridLines = true,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.BarChart data={data}>
+        {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />}
+        {showXAxis && <RechartsPrimitive.XAxis dataKey={index} />}
+        {showYAxis && <RechartsPrimitive.YAxis />}
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        {showLegend && <RechartsPrimitive.Legend />}
+        {categories.map((category, i) => (
+          <RechartsPrimitive.Bar
+            key={category}
+            dataKey={category}
+            fill={colors[i % colors.length]}
+          />
+        ))}
+      </RechartsPrimitive.BarChart>
+    </ChartContainer>
+  );
+};
+
+// Pie Chart with correct props
+interface PieChartProps extends CustomChartProps {
+  category: string;
+}
+
+export const PieChart: React.FC<PieChartProps> = ({
+  data,
+  category,
+  index = "name",
+  colors = ["#3b82f6", "#8b5cf6", "#f43f5e", "#10b981", "#f59e0b"],
+  valueFormatter = (value) => value.toString(),
+  className,
+  showLegend = true,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.PieChart>
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        {showLegend && <RechartsPrimitive.Legend />}
+        <RechartsPrimitive.Pie
+          data={data}
+          dataKey={category}
+          nameKey={index}
+          cx="50%"
+          cy="50%"
+          outerRadius={80}
+          label
+        >
+          {data.map((entry, i) => (
+            <RechartsPrimitive.Cell
+              key={`cell-${i}`}
+              fill={colors[i % colors.length]}
+            />
+          ))}
+        </RechartsPrimitive.Pie>
+      </RechartsPrimitive.PieChart>
+    </ChartContainer>
+  );
+};
 
 // Custom BarList component for displaying data as a simple bar list
 type BarListItemProps = {
@@ -374,7 +491,7 @@ type BarListItemProps = {
   color?: string;
 };
 
-const BarList: React.FC<{
+export const BarList: React.FC<{
   data: BarListItemProps[];
   valueFormatter?: (value: number) => string;
 }> = ({ data, valueFormatter = (value) => value.toString() }) => {
@@ -410,9 +527,4 @@ export {
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
-  // Export the new chart components
-  AreaChart,
-  BarChart,
-  PieChart,
-  BarList
 }
