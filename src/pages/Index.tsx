@@ -23,8 +23,8 @@ const Index = () => {
         <MetricsOverview />
 
         <div className="grid gap-6 md:grid-cols-2">
-          <IntegrationsList integrations={activeIntegrations} />
-          <RecentInsights insights={recentInsights} />
+          <IntegrationsList integrations={activeIntegrations as any} />
+          <RecentInsights insights={recentInsights as any} />
         </div>
 
         <NaturalQuerySection />

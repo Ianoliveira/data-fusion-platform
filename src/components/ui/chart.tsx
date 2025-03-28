@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
@@ -353,6 +354,55 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
+// Add the missing chart components from recharts
+const AreaChart: React.FC<React.ComponentProps<typeof RechartsPrimitive.AreaChart>> = (props) => {
+  return <RechartsPrimitive.AreaChart {...props} />
+}
+
+const BarChart: React.FC<React.ComponentProps<typeof RechartsPrimitive.BarChart>> = (props) => {
+  return <RechartsPrimitive.BarChart {...props} />
+}
+
+const PieChart: React.FC<React.ComponentProps<typeof RechartsPrimitive.PieChart>> = (props) => {
+  return <RechartsPrimitive.PieChart {...props} />
+}
+
+// Custom BarList component for displaying data as a simple bar list
+type BarListItemProps = {
+  name: string;
+  value: number;
+  color?: string;
+};
+
+const BarList: React.FC<{
+  data: BarListItemProps[];
+  valueFormatter?: (value: number) => string;
+}> = ({ data, valueFormatter = (value) => value.toString() }) => {
+  const maxValue = Math.max(...data.map(item => item.value));
+  
+  return (
+    <div className="space-y-3">
+      {data.map((item, i) => (
+        <div key={i} className="space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-medium">{item.name}</span>
+            <span className="text-sm text-muted-foreground">{valueFormatter(item.value)}</span>
+          </div>
+          <div className="h-2 w-full rounded-full bg-muted">
+            <div
+              className="h-full rounded-full"
+              style={{
+                width: `${(item.value / maxValue) * 100}%`,
+                backgroundColor: item.color || '#3b82f6'
+              }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export {
   ChartContainer,
   ChartTooltip,
@@ -360,4 +410,9 @@ export {
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
+  // Export the new chart components
+  AreaChart,
+  BarChart,
+  PieChart,
+  BarList
 }
