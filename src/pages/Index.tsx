@@ -1,13 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { Helmet } from "react-helmet";
+import { IntegrationsList } from "@/components/dashboard/IntegrationsList";
+import { RecentInsights } from "@/components/dashboard/RecentInsights";
+import { MetricsOverview } from "@/components/dashboard/MetricsOverview";
+import { NaturalQuerySection } from "@/components/dashboard/NaturalQuerySection";
+import { activeIntegrations, recentInsights } from "@/data/mockData";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <>
+      <Helmet>
+        <title>Twiggy.ai - Customer Data Platform</title>
+      </Helmet>
+      <div className="space-y-6">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground">
+            Visão geral da sua plataforma de dados e insights para decisões estratégicas.
+          </p>
+        </div>
+
+        <MetricsOverview />
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <IntegrationsList integrations={activeIntegrations} />
+          <RecentInsights insights={recentInsights} />
+        </div>
+
+        <NaturalQuerySection />
       </div>
-    </div>
+    </>
   );
 };
 
