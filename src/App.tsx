@@ -12,6 +12,8 @@ import SmartInsights from "./pages/SmartInsights";
 import Customers from "./pages/Customers";
 import PredictiveModels from "./pages/PredictiveModels";
 import Chatbot from "./pages/Chatbot";
+import DataLake from "./pages/DataLake";
+import DataVisualization from "./pages/DataVisualization";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="customers" element={<Customers />} />
             <Route path="predictive-models" element={<PredictiveModels />} />
             <Route path="chatbot" element={<Chatbot />} />
+            <Route path="data-lake" element={<DataLake />} />
+            <Route path="data-visualization" element={<DataVisualization />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
