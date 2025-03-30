@@ -6,10 +6,26 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { 
+  Search, 
+  Plus, 
+  Check, 
+  AlertTriangle, 
+  Clock, 
+  Database, 
+  ArrowRight, 
+  Link2,
+  Zap,
+  Settings,
+  FileText,
+  Layers,
+  Workflow
+} from "lucide-react";
 import { availableIntegrations, activeIntegrations } from "@/data/mockData";
-import { Search, Plus, Check, AlertTriangle, Clock, Database, ArrowRight, Link2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Integrations = () => {
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredIntegrations = (integrations: any) => {
@@ -51,6 +67,18 @@ const Integrations = () => {
     }
   };
 
+  const handleShowAutomations = () => {
+    toast({
+      title: "Redirecionando para automações",
+      description: "Você está sendo redirecionado para a página de automações.",
+    });
+    
+    // In a real application, this would navigate to the automations page
+    setTimeout(() => {
+      window.location.href = "/predictive-models";
+    }, 1000);
+  };
+
   return (
     <>
       <Helmet>
@@ -86,6 +114,7 @@ const Integrations = () => {
             <TabsTrigger value="active">Ativas</TabsTrigger>
             <TabsTrigger value="available">Disponíveis</TabsTrigger>
             <TabsTrigger value="data-flow">Fluxo de Dados</TabsTrigger>
+            <TabsTrigger value="capabilities">Capacidades</TabsTrigger>
           </TabsList>
           
           <TabsContent value="active" className="mt-6">
@@ -243,6 +272,166 @@ const Integrations = () => {
                 </p>
               </CardFooter>
             </Card>
+          </TabsContent>
+          
+          <TabsContent value="capabilities" className="mt-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Zap className="h-5 w-5 mr-2 text-amber-500" />
+                    Automações MCP
+                  </CardTitle>
+                  <CardDescription>
+                    Machine Control Points para automação de ações nas plataformas integradas
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-lg border p-4">
+                    <h4 className="font-medium mb-2">Ações disponíveis</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Criação de registros em CRMs</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Envio de comunicações automatizadas</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Segmentação de audiências para campanhas</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Gatilhos baseados em modelos preditivos</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
+                  <div className="rounded-lg border p-4">
+                    <h4 className="font-medium mb-2">Plataformas conectadas com automação</h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Salesforce</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>HubSpot</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Mailchimp</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Shopify</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                        <span>Facebook Ads (pendente)</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                        <span>Google Ads (pendente)</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    className="w-full" 
+                    variant="default"
+                    onClick={handleShowAutomations}
+                  >
+                    <Workflow className="h-4 w-4 mr-2" />
+                    Ver Automações Configuradas
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Settings className="h-5 w-5 mr-2 text-blue-500" />
+                    Capacidades de Integração
+                  </CardTitle>
+                  <CardDescription>
+                    Recursos e funcionalidades disponíveis nas plataformas integradas
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="rounded-lg border p-4">
+                    <h4 className="font-medium mb-2">Recursos de dados</h4>
+                    <div className="grid gap-2 text-sm">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <Layers className="h-4 w-4 text-primary" />
+                          <span>Sincronização bidirecional</span>
+                        </div>
+                        <Badge>Disponível</Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <Layers className="h-4 w-4 text-primary" />
+                          <span>Transformação automática</span>
+                        </div>
+                        <Badge>Disponível</Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <Layers className="h-4 w-4 text-primary" />
+                          <span>Enriquecimento de dados</span>
+                        </div>
+                        <Badge>Disponível</Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <Layers className="h-4 w-4 text-primary" />
+                          <span>Histograma de alterações</span>
+                        </div>
+                        <Badge variant="outline">Em breve</Badge>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="rounded-lg border p-4">
+                    <h4 className="font-medium mb-2">Protocolos suportados</h4>
+                    <div className="grid grid-cols-2 gap-2 text-sm">
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>REST API</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>Webhooks</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>OAuth 2.0</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>SFTP</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Check className="h-4 w-4 text-green-500" />
+                        <span>GraphQL</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <AlertTriangle className="h-4 w-4 text-yellow-500" />
+                        <span>SOAP (limitado)</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <Button variant="outline" className="w-full">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Ver Documentação de API
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
