@@ -36,8 +36,10 @@ const NavItem = ({
   <NavLink 
     to={to} 
     className={({ isActive }) => cn(
-      "flex items-center gap-3 px-3 py-2 rounded-md text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors",
-      isActive && "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+      "flex items-center gap-3 px-4 py-3 rounded-xl text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all duration-200",
+      isActive 
+        ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium shadow-neo-button-light dark:shadow-neo-button-dark" 
+        : "hover:shadow-neo-inset-light dark:hover:shadow-neo-inset-dark"
     )}
   >
     <Icon className="w-5 h-5" />
@@ -47,10 +49,10 @@ const NavItem = ({
 
 export function AppSidebar() {
   return (
-    <Sidebar className="border-r bg-sidebar">
-      <SidebarHeader className="p-4 border-b border-sidebar-border">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-10 h-10 text-white bg-twiggy-blue-600 rounded-lg">
+    <Sidebar className="border-r border-sidebar-border bg-sidebar">
+      <SidebarHeader className="p-5 border-b border-sidebar-border">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center w-10 h-10 text-white bg-twiggy-blue-600 rounded-xl shadow-neo-button-light dark:shadow-neo-button-dark">
             <Database className="w-5 h-5" />
           </div>
           <div>
@@ -60,34 +62,34 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="p-4">
-        <div className="mb-6">
-          <h3 className="mb-2 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider">
+      <SidebarContent className="p-5">
+        <div className="mb-8">
+          <h3 className="mb-3 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider px-4">
             Visão Geral
           </h3>
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-2">
             <NavItem to="/" icon={BarChart3}>Dashboard</NavItem>
             <NavItem to="/insights" icon={Sparkles}>Smart Insights</NavItem>
             <NavItem to="/customers" icon={Users}>Clientes</NavItem>
           </nav>
         </div>
         
-        <div className="mb-6">
-          <h3 className="mb-2 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider">
+        <div className="mb-8">
+          <h3 className="mb-3 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider px-4">
             Fontes de Dados
           </h3>
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-2">
             <NavItem to="/integrations" icon={Layers}>Integrações</NavItem>
             <NavItem to="/data-lake" icon={Database}>Data Lake</NavItem>
             <NavItem to="/data-visualization" icon={LineChart}>Visualização</NavItem>
           </nav>
         </div>
         
-        <div className="mb-6">
-          <h3 className="mb-2 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider">
+        <div className="mb-8">
+          <h3 className="mb-3 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider px-4">
             AI & Personalização
           </h3>
-          <nav className="flex flex-col gap-1">
+          <nav className="flex flex-col gap-2">
             <NavItem to="/predictive-models" icon={PieChart}>Modelos Preditivos</NavItem>
             <NavItem to="/journeys" icon={Compass}>Jornadas</NavItem>
             <NavItem to="/automations" icon={Zap}>Automações</NavItem>
@@ -96,9 +98,9 @@ export function AppSidebar() {
         </div>
       </SidebarContent>
       
-      <SidebarFooter className="p-4 border-t border-sidebar-border">
+      <SidebarFooter className="p-5 border-t border-sidebar-border">
         <NavLink to="/settings">
-          <Button variant="outline" className="w-full justify-start text-sidebar-foreground">
+          <Button variant="neo" className="w-full justify-start text-sidebar-foreground">
             <Settings className="w-4 h-4 mr-2" />
             Configurações
           </Button>

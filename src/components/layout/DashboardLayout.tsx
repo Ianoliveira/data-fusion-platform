@@ -14,14 +14,15 @@ export function DashboardLayout() {
       <div className="min-h-screen flex w-full">
         <AppSidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <header className="h-16 border-b flex items-center justify-between px-6">
+          <header className="h-16 border-b border-border flex items-center justify-between px-6 bg-background/90 backdrop-blur-md sticky top-0 z-10">
             <div className="flex items-center gap-4">
-              <SidebarTrigger />
+              <SidebarTrigger className="hover:bg-accent rounded-full p-2" />
               <div className="relative w-64">
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input 
                   placeholder="Buscar..." 
-                  className="pl-8 w-full"
+                  className="pl-10"
+                  variant="neo"
                 />
               </div>
             </div>
