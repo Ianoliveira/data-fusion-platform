@@ -11,7 +11,8 @@ import {
   Database, 
   MessageSquareText,
   LineChart,
-  Sparkles
+  Sparkles,
+  Compass
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -84,10 +85,11 @@ export function AppSidebar() {
         
         <div className="mb-6">
           <h3 className="mb-2 text-xs font-semibold text-sidebar-foreground/60 uppercase tracking-wider">
-            AI & Automação
+            AI & Personalização
           </h3>
           <nav className="flex flex-col gap-1">
             <NavItem to="/predictive-models" icon={PieChart}>Modelos Preditivos</NavItem>
+            <NavItem to="/journeys" icon={Compass}>Jornadas</NavItem>
             <NavItem to="/automations" icon={Zap}>Automações</NavItem>
             <NavItem to="/chatbot" icon={MessageSquareText}>Consulta Natural</NavItem>
           </nav>

@@ -15,6 +15,7 @@ import Chatbot from "./pages/Chatbot";
 import DataLake from "./pages/DataLake";
 import DataVisualization from "./pages/DataVisualization";
 import Automations from "./pages/Automations";
+import Journeys from "./pages/Journeys";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="integrations" element={<Integrations />} />
             <Route path="customers" element={<Customers />} />
             <Route path="predictive-models" element={<PredictiveModels />} />
+            <Route path="journeys" element={<Journeys />} />
             <Route path="chatbot" element={<Chatbot />} />
             <Route path="data-lake" element={<DataLake />} />
             <Route path="data-visualization" element={<DataVisualization />} />
