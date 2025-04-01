@@ -16,6 +16,8 @@ import DataLake from "./pages/DataLake";
 import DataVisualization from "./pages/DataVisualization";
 import Automations from "./pages/Automations";
 import Journeys from "./pages/Journeys";
+import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +44,8 @@ const App = () => (
             <Route path="data-lake" element={<DataLake />} />
             <Route path="data-visualization" element={<DataVisualization />} />
             <Route path="automations" element={<Automations />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
