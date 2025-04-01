@@ -108,7 +108,7 @@ const SmartInsights = () => {
         </div>
         
         <div className="grid gap-6 md:grid-cols-3">
-          <Card>
+          <Card variant="neo">
             <CardHeader className="pb-2">
               <CardTitle className="text-xl flex items-center">
                 <div className="p-1.5 bg-green-500/10 rounded mr-2">
@@ -126,7 +126,7 @@ const SmartInsights = () => {
             </CardContent>
           </Card>
           
-          <Card>
+          <Card variant="neo">
             <CardHeader className="pb-2">
               <CardTitle className="text-xl flex items-center">
                 <div className="p-1.5 bg-red-500/10 rounded mr-2">
@@ -144,7 +144,7 @@ const SmartInsights = () => {
             </CardContent>
           </Card>
           
-          <Card>
+          <Card variant="neo">
             <CardHeader className="pb-2">
               <CardTitle className="text-xl flex items-center">
                 <div className="p-1.5 bg-blue-500/10 rounded mr-2">
@@ -165,7 +165,7 @@ const SmartInsights = () => {
         
         <div className="grid gap-6 md:grid-cols-3">
           <div className="md:col-span-2">
-            <Card>
+            <Card variant="neo">
               <CardHeader>
                 <CardTitle>Insights Recentes</CardTitle>
                 <CardDescription>
@@ -175,7 +175,7 @@ const SmartInsights = () => {
               <CardContent>
                 <div className="space-y-4">
                   {recentInsights.map((insight) => (
-                    <div key={insight.id} className="p-4 border rounded-lg">
+                    <div key={insight.id} className="p-4 border rounded-lg shadow-neo-inset-light dark:shadow-neo-inset-dark bg-secondary">
                       <div className="flex justify-between">
                         <div className="flex items-center gap-2">
                           <Badge variant="outline" className={getCategoryColor(insight.category)}>
@@ -206,7 +206,7 @@ const SmartInsights = () => {
           </div>
           
           <div>
-            <Card>
+            <Card variant="neo">
               <CardHeader>
                 <CardTitle>Distribuição de Insights</CardTitle>
                 <CardDescription>Por categoria e prioridade</CardDescription>
@@ -218,34 +218,38 @@ const SmartInsights = () => {
                     <TabsTrigger value="priority" className="flex-1">Prioridade</TabsTrigger>
                   </TabsList>
                   
-                  <TabsContent value="category" className="h-[300px]">
-                    <PieChart
-                      data={[
-                        { name: "Oportunidades", value: 23 },
-                        { name: "Alertas", value: 7 },
-                        { name: "Tendências", value: 15 },
-                      ]}
-                      category="value"
-                      index="name"
-                      colors={["#10b981", "#ef4444", "#3b82f6"]}
-                      valueFormatter={(value) => `${value} insights`}
-                      className="h-[300px]"
-                    />
+                  <TabsContent value="category">
+                    <div className="h-[300px] w-full">
+                      <PieChart
+                        data={[
+                          { name: "Oportunidades", value: 23 },
+                          { name: "Alertas", value: 7 },
+                          { name: "Tendências", value: 15 },
+                        ]}
+                        category="value"
+                        index="name"
+                        colors={["#10b981", "#ef4444", "#3b82f6"]}
+                        valueFormatter={(value) => `${value} insights`}
+                        className="h-[300px]"
+                      />
+                    </div>
                   </TabsContent>
                   
-                  <TabsContent value="priority" className="h-[300px]">
-                    <BarChart
-                      data={[
-                        { name: "Alta", value: 16 },
-                        { name: "Média", value: 19 },
-                        { name: "Baixa", value: 10 },
-                      ]}
-                      categories={["value"]}
-                      index="name"
-                      colors={["#ef4444"]}
-                      valueFormatter={(value) => `${value} insights`}
-                      className="h-[300px]"
-                    />
+                  <TabsContent value="priority">
+                    <div className="h-[300px] w-full">
+                      <BarChart
+                        data={[
+                          { name: "Alta", value: 16 },
+                          { name: "Média", value: 19 },
+                          { name: "Baixa", value: 10 },
+                        ]}
+                        categories={["value"]}
+                        index="name"
+                        colors={["#ef4444"]}
+                        valueFormatter={(value) => `${value} insights`}
+                        className="h-[300px]"
+                      />
+                    </div>
                   </TabsContent>
                 </Tabs>
               </CardContent>

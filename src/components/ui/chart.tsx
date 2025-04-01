@@ -1,10 +1,8 @@
-
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 
 import { cn } from "@/lib/utils"
 
-// Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const
 
 export type ChartConfig = {
@@ -51,13 +49,25 @@ const ChartContainer = React.forwardRef<
         data-chart={chartId}
         ref={ref}
         className={cn(
-          "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+          "flex aspect-video w-full justify-center text-xs rounded-lg p-2",
+          "[&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground",
+          "[&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50",
+          "[&_.recharts-curve.recharts-tooltip-cursor]:stroke-border",
+          "[&_.recharts-dot[stroke='#fff']]:stroke-transparent",
+          "[&_.recharts-layer]:outline-none",
+          "[&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border",
+          "[&_.recharts-radial-bar-background-sector]:fill-muted",
+          "[&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted",
+          "[&_.recharts-reference-line_[stroke='#ccc']]:stroke-border",
+          "[&_.recharts-sector[stroke='#fff']]:stroke-transparent",
+          "[&_.recharts-sector]:outline-none",
+          "[&_.recharts-surface]:outline-none",
           className
         )}
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
+        <RechartsPrimitive.ResponsiveContainer width="100%" height="100%">
           {children}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
@@ -315,7 +325,6 @@ const ChartLegendContent = React.forwardRef<
 )
 ChartLegendContent.displayName = "ChartLegend"
 
-// Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
   payload: unknown,
@@ -354,7 +363,6 @@ function getPayloadConfigFromPayload(
     : config[key as keyof typeof config]
 }
 
-// Create proper wrapper components for recharts with correct props
 interface CustomChartProps {
   data: any[];
   index?: string;
@@ -367,7 +375,6 @@ interface CustomChartProps {
   showGridLines?: boolean;
 }
 
-// Area Chart with correct props
 interface AreaChartProps extends CustomChartProps {
   categories: string[];
 }
@@ -407,7 +414,6 @@ export const AreaChart: React.FC<AreaChartProps> = ({
   );
 };
 
-// Bar Chart with correct props
 interface BarChartProps extends CustomChartProps {
   categories: string[];
 }
@@ -426,10 +432,10 @@ export const BarChart: React.FC<BarChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.BarChart data={data}>
-        {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />}
-        {showXAxis && <RechartsPrimitive.XAxis dataKey={index} />}
-        {showYAxis && <RechartsPrimitive.YAxis />}
+      <RechartsPrimitive.BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+        {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" vertical={false} />}
+        {showXAxis && <RechartsPrimitive.XAxis dataKey={index} axisLine={false} tickLine={false} />}
+        {showYAxis && <RechartsPrimitive.YAxis axisLine={false} tickLine={false} />}
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
         {showLegend && <RechartsPrimitive.Legend />}
         {categories.map((category, i) => (
@@ -437,6 +443,8 @@ export const BarChart: React.FC<BarChartProps> = ({
             key={category}
             dataKey={category}
             fill={colors[i % colors.length]}
+            radius={[4, 4, 0, 0]}
+            barSize={40}
           />
         ))}
       </RechartsPrimitive.BarChart>
@@ -444,7 +452,6 @@ export const BarChart: React.FC<BarChartProps> = ({
   );
 };
 
-// Pie Chart with correct props
 interface PieChartProps extends CustomChartProps {
   category: string;
 }
@@ -460,9 +467,9 @@ export const PieChart: React.FC<PieChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.PieChart>
+      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
-        {showLegend && <RechartsPrimitive.Legend />}
+        {showLegend && <RechartsPrimitive.Legend layout="horizontal" verticalAlign="bottom" align="center" />}
         <RechartsPrimitive.Pie
           data={data}
           dataKey={category}
@@ -470,12 +477,14 @@ export const PieChart: React.FC<PieChartProps> = ({
           cx="50%"
           cy="50%"
           outerRadius={80}
-          label
+          label={(entry) => entry.name}
+          labelLine={false}
         >
           {data.map((entry, i) => (
             <RechartsPrimitive.Cell
               key={`cell-${i}`}
               fill={colors[i % colors.length]}
+              stroke="none"
             />
           ))}
         </RechartsPrimitive.Pie>
@@ -484,7 +493,6 @@ export const PieChart: React.FC<PieChartProps> = ({
   );
 };
 
-// Custom BarList component for displaying data as a simple bar list
 type BarListItemProps = {
   name: string;
   value: number;

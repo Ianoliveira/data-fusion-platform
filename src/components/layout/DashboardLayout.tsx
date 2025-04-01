@@ -31,8 +31,10 @@ export function DashboardLayout() {
               <UserNav />
             </div>
           </header>
-          <main className="flex-1 overflow-auto p-6">
-            <Outlet />
+          <main className="flex-1 overflow-auto p-6 bg-secondary/20">
+            <div className="max-w-[1800px] mx-auto">
+              <Outlet />
+            </div>
           </main>
         </div>
       </div>
