@@ -1241,7 +1241,7 @@ const DataVisualization = () => {
                       <BarList
                         data={satisfactionMetrics.map(item => ({
                           ...item,
-                          color: item.valor > 85 ? "#10b981" : "#3b82f6"
+                          color: item.value > 85 ? "#10b981" : "#3b82f6"
                         }))}
                         valueFormatter={(value) => `${value}%`}
                       />
