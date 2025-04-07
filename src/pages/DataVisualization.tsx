@@ -43,6 +43,65 @@ import {
 } from "@/components/ui/hover-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
+// MetricCard component for KPI dashboard
+interface MetricCardProps {
+  title: string;
+  value: string;
+  change?: string;
+  trend?: 'up' | 'down';
+  icon?: React.ReactNode;
+  sparklineData?: Array<{value: number}>;
+  sparklineKey?: string;
+  sparklineColor?: string;
+  description?: string;
+}
+
+const MetricCard = ({ 
+  title, 
+  value, 
+  change, 
+  trend,
+  icon,
+  sparklineData,
+  sparklineKey,
+  sparklineColor,
+  description 
+}: MetricCardProps) => {
+  return (
+    <Card>
+      <CardContent className="p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            {icon}
+            <span className="text-sm font-medium">{title}</span>
+          </div>
+          {change && (
+            <Badge variant={trend === 'up' ? 'default' : 'destructive'} className="text-xs h-5">
+              <span className="flex items-center gap-0.5">
+                {trend === 'up' ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+                {change}
+              </span>
+            </Badge>
+          )}
+        </div>
+        <div className="text-3xl font-bold mb-2">{value}</div>
+        {sparklineData && sparklineKey && (
+          <div className="h-[30px] mb-2">
+            <SparklineChart 
+              data={sparklineData} 
+              dataKey={sparklineKey} 
+              color={sparklineColor}
+            />
+          </div>
+        )}
+        {description && (
+          <div className="text-xs text-muted-foreground">{description}</div>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
+
 const DataVisualization = () => {
   const [activeView, setActiveView] = useState("traffic");
   const [dateRange, setDateRange] = useState("30d");
@@ -610,50 +669,3 @@ const DataVisualization = () => {
                           yAxis="pagesViewed"
                           zAxis="value"
                           name="Comportamento"
-                          color="#3b82f6"
-                          valueFormatter={(value) => value.toString()}
-                        />
-                      </div>
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Correlação entre tempo no site e páginas vistas
-                    </CardFooter>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Top Cidades</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <BarList
-                        data={[
-                          { name: "São Paulo", value: 32, color: "#3b82f6" },
-                          { name: "Rio de Janeiro", value: 18, color: "#10b981" },
-                          { name: "Belo Horizonte", value: 12, color: "#f59e0b" },
-                          { name: "Brasília", value: 10, color: "#8b5cf6" },
-                          { name: "Porto Alegre", value: 8, color: "#f472b6" }
-                        ]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            )}
-            
-            {activeView === "devices" && (
-              <div className="space-y-8">
-                <div className="h-[400px]">
-                  <Tabs defaultValue="pie">
-                    <TabsList className="mb-4">
-                      <TabsTrigger value="pie">Gráfico de Pizza</TabsTrigger>
-                      <TabsTrigger value="donut">Gráfico de Donut</TabsTrigger>
-                      <TabsTrigger value="radar">Radar de Interesses</TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="pie" className="h-[400px]">
-                      <PieChart
-                        data={deviceData}
-                        category="value"
-                        index="name"
-                        colors={["
