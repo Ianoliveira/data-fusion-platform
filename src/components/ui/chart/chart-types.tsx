@@ -92,6 +92,47 @@ export const BarChart: React.FC<BarChartProps> = ({
   );
 };
 
+interface LineChartProps extends CustomChartProps {
+  categories: string[];
+}
+
+// Added new Line Chart component
+export const LineChart: React.FC<LineChartProps> = ({
+  data,
+  categories,
+  index = "name",
+  colors = ["#3b82f6"],
+  valueFormatter = (value) => value.toString(),
+  className,
+  showLegend = true,
+  showXAxis = true,
+  showYAxis = true,
+  showGridLines = true,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.LineChart data={data}>
+        {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />}
+        {showXAxis && <RechartsPrimitive.XAxis dataKey={index} />}
+        {showYAxis && <RechartsPrimitive.YAxis />}
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        {showLegend && <RechartsPrimitive.Legend />}
+        {categories.map((category, i) => (
+          <RechartsPrimitive.Line
+            key={category}
+            type="monotone"
+            dataKey={category}
+            stroke={colors[i % colors.length]}
+            strokeWidth={2}
+            dot={{ r: 4 }}
+            activeDot={{ r: 6 }}
+          />
+        ))}
+      </RechartsPrimitive.LineChart>
+    </ChartContainer>
+  );
+};
+
 interface PieChartProps extends CustomChartProps {
   category: string;
 }
@@ -130,6 +171,75 @@ export const PieChart: React.FC<PieChartProps> = ({
         </RechartsPrimitive.Pie>
       </RechartsPrimitive.PieChart>
     </ChartContainer>
+  );
+};
+
+// Added new Donut Chart component
+export const DonutChart: React.FC<PieChartProps> = ({
+  data,
+  category,
+  index = "name",
+  colors = ["#3b82f6", "#8b5cf6", "#f43f5e", "#10b981", "#f59e0b"],
+  valueFormatter = (value) => value.toString(),
+  className,
+  showLegend = true,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        {showLegend && <RechartsPrimitive.Legend layout="horizontal" verticalAlign="bottom" align="center" />}
+        <RechartsPrimitive.Pie
+          data={data}
+          dataKey={category}
+          nameKey={index}
+          cx="50%"
+          cy="50%"
+          innerRadius={60}
+          outerRadius={80}
+          label={false}
+        >
+          {data.map((entry, i) => (
+            <RechartsPrimitive.Cell
+              key={`cell-${i}`}
+              fill={colors[i % colors.length]}
+              stroke="none"
+            />
+          ))}
+        </RechartsPrimitive.Pie>
+      </RechartsPrimitive.PieChart>
+    </ChartContainer>
+  );
+};
+
+// Added new Sparkline Chart for compact trend visualization
+export const SparklineChart: React.FC<{
+  data: any[];
+  dataKey: string;
+  color?: string;
+  height?: number;
+  className?: string;
+}> = ({
+  data,
+  dataKey,
+  color = "#3b82f6",
+  height = 30,
+  className,
+}) => {
+  return (
+    <div className={className} style={{ height: `${height}px` }}>
+      <ChartContainer config={{}}>
+        <RechartsPrimitive.LineChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+          <RechartsPrimitive.Line
+            type="monotone"
+            dataKey={dataKey}
+            stroke={color}
+            strokeWidth={2}
+            dot={false}
+          />
+        </RechartsPrimitive.LineChart>
+      </ChartContainer>
+    </div>
   );
 };
 

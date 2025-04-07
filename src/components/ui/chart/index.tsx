@@ -25,5 +25,8 @@ export {
   AreaChart, 
   BarChart, 
   PieChart, 
-  BarList 
+  BarList,
+  LineChart,     // Added new chart type
+  DonutChart,    // Added new chart type
+  SparklineChart // Added new chart type
 } from './chart-types';
