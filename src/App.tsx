@@ -19,39 +19,43 @@ import Journeys from "./pages/Journeys";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import { useState } from "react";
 
-const queryClient = new QueryClient();
+const App = () => {
+  // Create a new QueryClient instance within the component
+  const [queryClient] = useState(() => new QueryClient());
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Helmet>
-        <title>Twiggy.ai - Customer Data Platform</title>
-        <meta name="description" content="Plataforma de integração de dados para e-commerces" />
-      </Helmet>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<DashboardLayout />}>
-            <Route index element={<Index />} />
-            <Route path="insights" element={<SmartInsights />} />
-            <Route path="integrations" element={<Integrations />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="predictive-models" element={<PredictiveModels />} />
-            <Route path="journeys" element={<Journeys />} />
-            <Route path="chatbot" element={<Chatbot />} />
-            <Route path="data-lake" element={<DataLake />} />
-            <Route path="data-visualization" element={<DataVisualization />} />
-            <Route path="automations" element={<Automations />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Helmet>
+          <title>Twiggy.ai - Customer Data Platform</title>
+          <meta name="description" content="Plataforma de integração de dados para e-commerces" />
+        </Helmet>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<DashboardLayout />}>
+              <Route index element={<Index />} />
+              <Route path="insights" element={<SmartInsights />} />
+              <Route path="integrations" element={<Integrations />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="predictive-models" element={<PredictiveModels />} />
+              <Route path="journeys" element={<Journeys />} />
+              <Route path="chatbot" element={<Chatbot />} />
+              <Route path="data-lake" element={<DataLake />} />
+              <Route path="data-visualization" element={<DataVisualization />} />
+              <Route path="automations" element={<Automations />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

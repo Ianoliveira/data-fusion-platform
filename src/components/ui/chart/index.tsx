@@ -33,5 +33,7 @@ export {
   FunnelChart,   // Added new chart type
   ScatterChart,  // Added new chart type
   GaugeChart,    // Added new chart type
-  TreeMapChart   // Added new chart type
+  TreeMapChart,   // Added new chart type
+  // Also export the BarListItemProps interface
+  type BarListItemProps
 } from './chart-types';

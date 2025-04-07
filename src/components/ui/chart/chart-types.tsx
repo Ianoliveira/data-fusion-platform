@@ -424,11 +424,12 @@ export const GaugeChart: React.FC<{
   );
 };
 
-type BarListItemProps = {
+// Export the interface so it can be used in other files
+export interface BarListItemProps {
   name: string;
   value: number;
   color?: string;
-};
+}
 
 export const BarList: React.FC<{
   data: BarListItemProps[];
