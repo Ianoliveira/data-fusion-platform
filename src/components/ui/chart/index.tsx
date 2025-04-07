@@ -28,5 +28,10 @@ export {
   BarList,
   LineChart,     // Added new chart type
   DonutChart,    // Added new chart type
-  SparklineChart // Added new chart type
+  SparklineChart, // Added new chart type
+  RadarChart,    // Added new chart type
+  FunnelChart,   // Added new chart type
+  ScatterChart,  // Added new chart type
+  GaugeChart,    // Added new chart type
+  TreeMapChart   // Added new chart type
 } from './chart-types';

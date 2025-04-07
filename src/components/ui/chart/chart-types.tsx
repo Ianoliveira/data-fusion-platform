@@ -243,6 +243,187 @@ export const SparklineChart: React.FC<{
   );
 };
 
+// New components for enhanced visualizations
+export const RadarChart: React.FC<{
+  data: any[];
+  categories: string[];
+  index?: string;
+  colors?: string[];
+  valueFormatter?: (value: any) => string;
+  className?: string;
+}> = ({
+  data,
+  categories,
+  index = "name",
+  colors = ["#3b82f6"],
+  valueFormatter = (value) => value.toString(),
+  className,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.RadarChart data={data} margin={{ top: 10, right: 30, left: 30, bottom: 10 }}>
+        <RechartsPrimitive.PolarGrid />
+        <RechartsPrimitive.PolarAngleAxis dataKey={index} />
+        <RechartsPrimitive.PolarRadiusAxis />
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        {categories.map((category, i) => (
+          <RechartsPrimitive.Radar
+            key={category}
+            name={category}
+            dataKey={category}
+            stroke={colors[i % colors.length]}
+            fill={colors[i % colors.length]}
+            fillOpacity={0.2}
+          />
+        ))}
+        <RechartsPrimitive.Legend />
+      </RechartsPrimitive.RadarChart>
+    </ChartContainer>
+  );
+};
+
+export const FunnelChart: React.FC<{
+  data: any[];
+  category: string;
+  index?: string;
+  colors?: string[];
+  valueFormatter?: (value: any) => string;
+  className?: string;
+}> = ({
+  data,
+  category,
+  index = "name",
+  colors = ["#3b82f6", "#8b5cf6", "#f43f5e", "#10b981", "#f59e0b"],
+  valueFormatter = (value) => value.toString(),
+  className,
+}) => {
+  // Sort data in descending order for funnel visualization
+  const sortedData = [...data].sort((a, b) => b[category] - a[category]);
+  
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.BarChart 
+        data={sortedData} 
+        layout="vertical" 
+        margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
+      >
+        <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+        <RechartsPrimitive.XAxis type="number" />
+        <RechartsPrimitive.YAxis dataKey={index} type="category" axisLine={false} tickLine={false} />
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+        <RechartsPrimitive.Bar dataKey={category} radius={[0, 4, 4, 0]}>
+          {sortedData.map((entry, i) => (
+            <RechartsPrimitive.Cell 
+              key={`cell-${i}`} 
+              fill={colors[i % colors.length]} 
+            />
+          ))}
+        </RechartsPrimitive.Bar>
+      </RechartsPrimitive.BarChart>
+    </ChartContainer>
+  );
+};
+
+export const ScatterChart: React.FC<{
+  data: any[];
+  xAxis: string;
+  yAxis: string;
+  zAxis?: string;
+  name?: string;
+  color?: string;
+  valueFormatter?: (value: any) => string;
+  className?: string;
+}> = ({
+  data,
+  xAxis,
+  yAxis,
+  zAxis,
+  name = "",
+  color = "#3b82f6",
+  valueFormatter = (value) => value.toString(),
+  className,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
+        <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
+        <RechartsPrimitive.XAxis dataKey={xAxis} name={xAxis} />
+        <RechartsPrimitive.YAxis dataKey={yAxis} name={yAxis} />
+        <RechartsPrimitive.Tooltip 
+          formatter={valueFormatter}
+          cursor={{ strokeDasharray: '3 3' }}
+        />
+        <RechartsPrimitive.Scatter
+          name={name}
+          data={data}
+          fill={color}
+          shape="circle"
+        >
+          {zAxis && data.map((entry, index) => (
+            <RechartsPrimitive.Cell 
+              key={`cell-${index}`} 
+              radius={entry[zAxis] / 5 + 2} // Dynamic size based on zAxis value
+            />
+          ))}
+        </RechartsPrimitive.Scatter>
+        <RechartsPrimitive.Legend />
+      </RechartsPrimitive.ScatterChart>
+    </ChartContainer>
+  );
+};
+
+export const GaugeChart: React.FC<{
+  value: number;
+  min?: number;
+  max?: number;
+  color?: string;
+  className?: string;
+}> = ({
+  value,
+  min = 0,
+  max = 100,
+  color = "#3b82f6",
+  className,
+}) => {
+  // Calculate the percentage for the gauge
+  const percentage = Math.min(Math.max(((value - min) / (max - min)) * 100, 0), 100);
+  
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+        <RechartsPrimitive.Pie
+          data={[
+            { name: 'Value', value: percentage },
+            { name: 'Remaining', value: 100 - percentage }
+          ]}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          startAngle={180}
+          endAngle={0}
+          innerRadius={60}
+          outerRadius={80}
+          paddingAngle={0}
+          cornerRadius={0}
+        >
+          <RechartsPrimitive.Cell fill={color} />
+          <RechartsPrimitive.Cell fill="#e6e6e6" />
+        </RechartsPrimitive.Pie>
+        <RechartsPrimitive.Text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          className="text-lg font-medium"
+        >
+          {value}
+        </RechartsPrimitive.Text>
+      </RechartsPrimitive.PieChart>
+    </ChartContainer>
+  );
+};
+
 type BarListItemProps = {
   name: string;
   value: number;
@@ -275,5 +456,43 @@ export const BarList: React.FC<{
         </div>
       ))}
     </div>
+  );
+};
+
+// Tree Map visualization for hierarchical data
+export const TreeMapChart: React.FC<{
+  data: any[];
+  dataKey: string;
+  nameKey?: string;
+  colors?: string[];
+  valueFormatter?: (value: any) => string;
+  className?: string;
+}> = ({
+  data,
+  dataKey,
+  nameKey = "name",
+  colors = ["#3b82f6", "#8b5cf6", "#f43f5e", "#10b981", "#f59e0b"],
+  valueFormatter = (value) => value.toString(),
+  className,
+}) => {
+  return (
+    <ChartContainer config={{}} className={className}>
+      <RechartsPrimitive.Treemap
+        data={data}
+        dataKey={dataKey}
+        nameKey={nameKey}
+        aspectRatio={4/3}
+        stroke="#fff"
+        fill="#8884d8"
+      >
+        {data.map((entry, index) => (
+          <RechartsPrimitive.Cell 
+            key={`cell-${index}`} 
+            fill={colors[index % colors.length]} 
+          />
+        ))}
+        <RechartsPrimitive.Tooltip formatter={valueFormatter} />
+      </RechartsPrimitive.Treemap>
+    </ChartContainer>
   );
 };
