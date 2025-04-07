@@ -1,3 +1,4 @@
+
 import { Helmet } from "react-helmet";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -669,3 +670,527 @@ const DataVisualization = () => {
                           yAxis="pagesViewed"
                           zAxis="value"
                           name="Comportamento"
+                          color="#3b82f6"
+                          valueFormatter={(value) => value.toString()}
+                        />
+                      </div>
+                    </CardContent>
+                    <CardFooter className="text-sm text-muted-foreground">
+                      Correlação entre tempo no site e páginas vistas
+                    </CardFooter>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Top Cidades</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <BarList
+                        data={[
+                          { name: "São Paulo", value: 32, color: "#3b82f6" },
+                          { name: "Rio de Janeiro", value: 18, color: "#10b981" },
+                          { name: "Belo Horizonte", value: 12, color: "#f59e0b" },
+                          { name: "Brasília", value: 10, color: "#8b5cf6" },
+                          { name: "Porto Alegre", value: 8, color: "#f472b6" }
+                        ]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+            
+            {activeView === "devices" && (
+              <div className="space-y-8">
+                <div className="h-[400px]">
+                  <Tabs defaultValue="pie">
+                    <TabsList className="mb-4">
+                      <TabsTrigger value="pie">Gráfico de Pizza</TabsTrigger>
+                      <TabsTrigger value="donut">Gráfico de Donut</TabsTrigger>
+                      <TabsTrigger value="radar">Radar de Interesses</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="pie" className="h-[400px]">
+                      <PieChart
+                        data={deviceData}
+                        category="value"
+                        index="name"
+                        colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="donut" className="h-[400px]">
+                      <DonutChart
+                        data={deviceData}
+                        category="value"
+                        index="name"
+                        colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="radar" className="h-[400px]">
+                      <RadarChart
+                        data={customerInterestsData}
+                        categories={["A", "B", "C"]}
+                        index="category"
+                        colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                        valueFormatter={(value) => value.toString()}
+                      />
+                    </TabsContent>
+                  </Tabs>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Demografia de Usuários</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[300px] w-full">
+                        <BarChart
+                          data={demoData}
+                          categories={["Homens", "Mulheres"]}
+                          index="name"
+                          colors={["#3b82f6", "#f472b6"]}
+                          valueFormatter={(value) => `${value}%`}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Taxa de Conversão por Dispositivo</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[300px] w-full">
+                        <BarChart
+                          data={conversionByDeviceData}
+                          categories={["Taxa"]}
+                          index="name"
+                          colors={["#10b981"]}
+                          valueFormatter={(value) => `${value}%`}
+                        />
+                      </div>
+                    </CardContent>
+                    <CardFooter className="text-sm text-muted-foreground">
+                      Desktop apresenta a melhor taxa de conversão
+                    </CardFooter>
+                  </Card>
+                </div>
+              </div>
+            )}
+            
+            {activeView === "conversion" && (
+              <div className="space-y-8">
+                <div className="h-[400px] w-full">
+                  <Tabs defaultValue="funnel">
+                    <TabsList className="mb-4">
+                      <TabsTrigger value="funnel">Funil de Conversão</TabsTrigger>
+                      <TabsTrigger value="journey">Jornada do Cliente</TabsTrigger>
+                      <TabsTrigger value="goals">Metas</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="funnel" className="h-[400px]">
+                      <FunnelChart
+                        data={conversionData}
+                        category="Conversão"
+                        index="name"
+                        colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="journey" className="h-[400px]">
+                      <FunnelChart
+                        data={customerJourneyData}
+                        category="value"
+                        index="name"
+                        colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
+                        valueFormatter={(value) => value.toString()}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="goals" className="h-[400px]">
+                      <BarChart
+                        data={goalCompletionData}
+                        categories={["value"]}
+                        index="name"
+                        colors={["#10b981"]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </TabsContent>
+                  </Tabs>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">A/B Testing</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[300px] w-full">
+                        <BarChart
+                          data={abTestData}
+                          categories={["conversão", "tempo", "rejeição"]}
+                          index="name"
+                          colors={["#3b82f6", "#10b981", "#f43f5e"]}
+                          valueFormatter={(value) => value.toString()}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Valor Médio de Pedido</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[300px] w-full">
+                        <LineChart
+                          data={averageOrderData}
+                          categories={["value"]}
+                          index="name"
+                          colors={["#f59e0b"]}
+                          valueFormatter={(value) => `R$ ${value}`}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+            
+            {activeView === "pages" && (
+              <div className="space-y-8">
+                <div className="h-[400px] w-full">
+                  <Tabs defaultValue="bar">
+                    <TabsList className="mb-4">
+                      <TabsTrigger value="bar">Páginas Populares</TabsTrigger>
+                      <TabsTrigger value="table">Visão Detalhada</TabsTrigger>
+                      <TabsTrigger value="speed">Velocidade de Carregamento</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="bar" className="h-[400px]">
+                      <BarChart
+                        data={topPagesData}
+                        categories={["value"]}
+                        index="name"
+                        colors={["#3b82f6"]}
+                        valueFormatter={(value) => value.toLocaleString()}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="table" className="h-[400px]">
+                      <ScrollArea className="h-[400px]">
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Página</TableHead>
+                              <TableHead className="text-right">Visualizações</TableHead>
+                              <TableHead className="text-right">Tempo Médio</TableHead>
+                              <TableHead className="text-right">Taxa de Rejeição</TableHead>
+                              <TableHead className="text-right">Tendência</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {tableData.map((row) => (
+                              <TableRow key={row.page}>
+                                <TableCell>{row.page}</TableCell>
+                                <TableCell className="text-right">{row.views.toLocaleString()}</TableCell>
+                                <TableCell className="text-right">{row.time}</TableCell>
+                                <TableCell className="text-right">{row.bounce}</TableCell>
+                                <TableCell className="text-right">
+                                  {row.trend === "up" ? (
+                                    <TrendingUp className="h-4 w-4 text-green-500 ml-auto" />
+                                  ) : (
+                                    <TrendingDown className="h-4 w-4 text-red-500 ml-auto" />
+                                  )}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </ScrollArea>
+                    </TabsContent>
+                    
+                    <TabsContent value="speed" className="h-[400px]">
+                      <BarChart
+                        data={pageSpeedData}
+                        categories={["Carregamento", "Renderização"]}
+                        index="name"
+                        colors={["#3b82f6", "#10b981"]}
+                        valueFormatter={(value) => `${value}s`}
+                      />
+                    </TabsContent>
+                  </Tabs>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Tempo no Site</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[300px] w-full">
+                        <LineChart
+                          data={timeOnSiteData}
+                          categories={["tempo"]}
+                          index="name"
+                          colors={["#10b981"]}
+                          valueFormatter={(value) => `${value} min`}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Engagement de Conteúdo</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <ScrollArea className="h-[300px]">
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Conteúdo</TableHead>
+                              <TableHead className="text-right">Visualizações</TableHead>
+                              <TableHead className="text-right">Taxa de Eng.</TableHead>
+                              <TableHead className="text-right">Tempo Médio</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {contentEngagementData.map((row) => (
+                              <TableRow key={row.name}>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell className="text-right">{row.views.toLocaleString()}</TableCell>
+                                <TableCell className="text-right">{row.engRate}%</TableCell>
+                                <TableCell className="text-right">{row.avgTime} min</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </ScrollArea>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+            
+            {activeView === "customer" && (
+              <div className="space-y-8">
+                <div className="h-[400px] w-full">
+                  <Tabs defaultValue="satisfaction">
+                    <TabsList className="mb-4">
+                      <TabsTrigger value="satisfaction">Satisfação</TabsTrigger>
+                      <TabsTrigger value="journey">Jornada</TabsTrigger>
+                      <TabsTrigger value="nps">NPS</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="satisfaction" className="h-[400px]">
+                      <BarChart
+                        data={satisfactionMetrics}
+                        categories={["value"]}
+                        index="name"
+                        colors={["#10b981"]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="journey" className="h-[400px]">
+                      <FunnelChart
+                        data={customerJourneyData}
+                        category="value"
+                        index="name"
+                        colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
+                        valueFormatter={(value) => value.toString()}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="nps" className="h-[400px]">
+                      <LineChart
+                        data={npsData}
+                        categories={["score"]}
+                        index="name"
+                        colors={["#10b981"]}
+                        valueFormatter={(value) => value.toString()}
+                      />
+                    </TabsContent>
+                  </Tabs>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Áreas de Interesse</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[300px] w-full">
+                        <RadarChart
+                          data={customerInterestsData}
+                          categories={["A", "B", "C"]}
+                          index="category"
+                          colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                          valueFormatter={(value) => value.toString()}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Performance de Produtos</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <ScrollArea className="h-[300px]">
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Produto</TableHead>
+                              <TableHead className="text-right">Vendas</TableHead>
+                              <TableHead className="text-right">Avaliação</TableHead>
+                              <TableHead className="text-right">Taxa de Recompra</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {productPerformanceData.map((row) => (
+                              <TableRow key={row.name}>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell className="text-right">{row.vendas}</TableCell>
+                                <TableCell className="text-right">{row.reviews}</TableCell>
+                                <TableCell className="text-right">{row.recompra}%</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </ScrollArea>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+            
+            {activeView === "performance" && (
+              <div className="space-y-8">
+                <div className="h-[400px] w-full">
+                  <Tabs defaultValue="roi">
+                    <TabsList className="mb-4">
+                      <TabsTrigger value="roi">ROI Marketing</TabsTrigger>
+                      <TabsTrigger value="revenue">Receita Trimestral</TabsTrigger>
+                      <TabsTrigger value="social">Redes Sociais</TabsTrigger>
+                    </TabsList>
+                    
+                    <TabsContent value="roi" className="h-[400px]">
+                      <BarChart
+                        data={marketingROIData}
+                        categories={["roi"]}
+                        index="name"
+                        colors={["#10b981"]}
+                        valueFormatter={(value) => `${value}%`}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="revenue" className="h-[400px]">
+                      <LineChart
+                        data={quarterlyRevenueData}
+                        categories={["receita", "meta"]}
+                        index="name"
+                        colors={["#3b82f6", "#f59e0b"]}
+                        valueFormatter={(value) => `R$ ${(value/1000).toFixed(0)}k`}
+                      />
+                    </TabsContent>
+                    
+                    <TabsContent value="social" className="h-[400px]">
+                      <ScrollArea className="h-[400px]">
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Plataforma</TableHead>
+                              <TableHead className="text-right">Seguidores</TableHead>
+                              <TableHead className="text-right">Engagement</TableHead>
+                              <TableHead className="text-right">Cliques</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {socialMediaData.map((row) => (
+                              <TableRow key={row.name}>
+                                <TableCell>{row.name}</TableCell>
+                                <TableCell className="text-right">{row.followers.toLocaleString()}</TableCell>
+                                <TableCell className="text-right">{row.engagement}%</TableCell>
+                                <TableCell className="text-right">{row.clicks}</TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </ScrollArea>
+                    </TabsContent>
+                  </Tabs>
+                </div>
+                
+                <div className="grid md:grid-cols-2 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Custo por Aquisição</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          <div className="text-2xl font-bold">R$ 28,45</div>
+                          <div className="text-xs text-muted-foreground text-center">
+                            Custo médio por cliente adquirido
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="h-[150px] w-[150px]">
+                            <GaugeChart
+                              value={72}
+                              min={0}
+                              max={100}
+                              color="#3b82f6"
+                            />
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-2">
+                            Eficiência de Aquisição
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Valor do Cliente</CardTitle>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <div className="h-[200px] w-full">
+                        <TreeMapChart
+                          data={[
+                            { name: "Alto valor", value: 45 },
+                            { name: "Médio valor", value: 30 },
+                            { name: "Baixo valor", value: 25 },
+                          ]}
+                          dataKey="value"
+                          nameKey="name"
+                          colors={["#10b981", "#f59e0b", "#f43f5e"]}
+                          valueFormatter={(value) => `${value}%`}
+                        />
+                      </div>
+                      <div className="text-xs text-muted-foreground mt-4 text-center">
+                        Segmentação de clientes por valor vitalício (LTV)
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </>
+  );
+};
+
+export default DataVisualization;
