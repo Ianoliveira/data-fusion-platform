@@ -1,4 +1,3 @@
-
 import { Helmet } from "react-helmet";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -218,11 +217,11 @@ const DataVisualization = () => {
 
   // Customer satisfaction data
   const satisfactionMetrics = [
-    { name: "Atendimento", valor: 85 },
-    { name: "Facilidade de Uso", valor: 82 },
-    { name: "Preço", valor: 78 },
-    { name: "Qualidade do Produto", valor: 92 },
-    { name: "Entrega", valor: 88 }
+    { name: "Atendimento", value: 85 },
+    { name: "Facilidade de Uso", value: 82 },
+    { name: "Preço", value: 78 },
+    { name: "Qualidade do Produto", value: 92 },
+    { name: "Entrega", value: 88 }
   ];
   
   // AB testing results
@@ -1367,7 +1366,7 @@ const DataVisualization = () => {
                               <TableCell className="text-right">R$ {item.investment}</TableCell>
                               <TableCell className="text-right">R$ {item.revenue}</TableCell>
                               <TableCell className="text-right">
-                                <Badge variant={item.roi > 350 ? "success" : "default"}>
+                                <Badge variant={item.roi > 350 ? "secondary" : "default"}>
                                   {item.roi}%
                                 </Badge>
                               </TableCell>
