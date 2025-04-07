@@ -14,7 +14,8 @@ import {
   FunnelChart,
   ScatterChart,
   GaugeChart,
-  TreeMapChart
+  TreeMapChart,
+  type BarListItemProps
 } from "@/components/ui/chart";
 import { 
   BarChart3, 
@@ -160,12 +161,12 @@ const DataVisualization = () => {
 
   // New data sets for additional metrics
   const averageOrderData = [
-    { name: "Jan", valor: 120 },
-    { name: "Fev", valor: 135 },
-    { name: "Mar", valor: 142 },
-    { name: "Abr", valor: 128 },
-    { name: "Mai", valor: 156 },
-    { name: "Jun", valor: 168 }
+    { name: "Jan", value: 120 },
+    { name: "Fev", value: 135 },
+    { name: "Mar", value: 142 },
+    { name: "Abr", value: 128 },
+    { name: "Mai", value: 156 },
+    { name: "Jun", value: 168 }
   ];
 
   const customerJourneyData = [
@@ -494,10 +495,10 @@ const DataVisualization = () => {
               {activeView === "performance" && "ROI e métricas de desempenho de campanhas e produtos"}
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             {activeView === "traffic" && (
               <div className="space-y-8">
-                <div className="h-[400px]">
+                <div className="h-[400px] w-full">
                   <Tabs defaultValue="area">
                     <TabsList className="mb-4">
                       <TabsTrigger value="area">Gráfico de Área</TabsTrigger>
@@ -543,13 +544,15 @@ const DataVisualization = () => {
                       <CardTitle className="text-lg">Origens de Tráfego</CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <DonutChart
-                        data={acquisitionData}
-                        category="value"
-                        index="name"
-                        colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
+                      <div className="h-[300px] w-full">
+                        <DonutChart
+                          data={acquisitionData}
+                          category="value"
+                          index="name"
+                          colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
+                          valueFormatter={(value) => `${value}%`}
+                        />
+                      </div>
                     </CardContent>
                     <CardFooter className="text-sm text-muted-foreground">
                       42% do tráfego vem de pesquisa orgânica
@@ -561,13 +564,15 @@ const DataVisualization = () => {
                       <CardTitle className="text-lg">Usuários Novos vs Retorno</CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <LineChart
-                        data={userEngagementData}
-                        categories={["Retorno", "Novos"]}
-                        index="name"
-                        colors={["#8b5cf6", "#f59e0b"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
+                      <div className="h-[300px] w-full">
+                        <LineChart
+                          data={userEngagementData}
+                          categories={["Retorno", "Novos"]}
+                          index="name"
+                          colors={["#8b5cf6", "#f59e0b"]}
+                          valueFormatter={(value) => `${value}%`}
+                        />
+                      </div>
                     </CardContent>
                     <CardFooter className="text-sm text-muted-foreground">
                       Tendência de aumento de 23% em usuários recorrentes
@@ -581,13 +586,15 @@ const DataVisualization = () => {
                       <CardTitle className="text-lg">Localização</CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <PieChart
-                        data={countryData}
-                        category="value"
-                        index="name"
-                        colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
+                      <div className="h-[250px] w-full">
+                        <PieChart
+                          data={countryData}
+                          category="value"
+                          index="name"
+                          colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
+                          valueFormatter={(value) => `${value}%`}
+                        />
+                      </div>
                     </CardContent>
                   </Card>
                   
@@ -596,15 +603,17 @@ const DataVisualization = () => {
                       <CardTitle className="text-lg">Comportamento do Usuário</CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <ScatterChart
-                        data={userBehaviorData}
-                        xAxis="timeOnSite"
-                        yAxis="pagesViewed"
-                        zAxis="value"
-                        name="Comportamento"
-                        color="#3b82f6"
-                        valueFormatter={(value) => value.toString()}
-                      />
+                      <div className="h-[250px] w-full">
+                        <ScatterChart
+                          data={userBehaviorData}
+                          xAxis="timeOnSite"
+                          yAxis="pagesViewed"
+                          zAxis="value"
+                          name="Comportamento"
+                          color="#3b82f6"
+                          valueFormatter={(value) => value.toString()}
+                        />
+                      </div>
                     </CardContent>
                     <CardFooter className="text-sm text-muted-foreground">
                       Correlação entre tempo no site e páginas vistas
@@ -647,844 +656,4 @@ const DataVisualization = () => {
                         data={deviceData}
                         category="value"
                         index="name"
-                        colors={["#3b82f6", "#10b981", "#f59e0b"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </TabsContent>
-                    
-                    <TabsContent value="donut" className="h-[400px]">
-                      <DonutChart
-                        data={deviceData}
-                        category="value"
-                        index="name"
-                        colors={["#3b82f6", "#10b981", "#f59e0b"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </TabsContent>
-                    
-                    <TabsContent value="radar" className="h-[400px]">
-                      <RadarChart
-                        data={customerInterestsData}
-                        categories={["A", "B", "C"]}
-                        index="category"
-                        colors={["#3b82f6", "#10b981", "#f59e0b"]}
-                        valueFormatter={(value) => value.toString()}
-                      />
-                    </TabsContent>
-                  </Tabs>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Conversão por Dispositivo</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <BarChart
-                        data={conversionByDeviceData}
-                        categories={["Taxa"]}
-                        index="name"
-                        colors={["#8b5cf6"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Desktop tem a maior taxa de conversão (3.8%)
-                    </CardFooter>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Velocidade da Página</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <BarChart
-                        data={pageSpeedData}
-                        categories={["Carregamento", "Renderização"]}
-                        index="name"
-                        colors={["#f59e0b", "#10b981"]}
-                        valueFormatter={(value) => `${value}s`}
-                      />
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Tempo médio de carregamento: Desktop (2.8s) vs Mobile (3.6s)
-                    </CardFooter>
-                  </Card>
-                </div>
-                
-                {/* New A/B Testing Results */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Resultados de Teste A/B</CardTitle>
-                    <CardDescription>Comparação de métricas entre versões de páginas</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid md:grid-cols-3 gap-6">
-                      <Card className="shadow-none border">
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-md">Taxa de Conversão</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="text-center">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <div className="text-3xl font-bold text-muted-foreground">2.8%</div>
-                                <div className="text-sm text-muted-foreground">Versão A</div>
-                              </div>
-                              <div>
-                                <div className="text-3xl font-bold text-primary">3.6%</div>
-                                <div className="text-sm text-muted-foreground">Versão B</div>
-                                <div className="text-xs text-green-500 flex items-center mt-1">
-                                  <TrendingUp className="h-3 w-3 mr-1" /> +28.6%
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="shadow-none border">
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-md">Tempo na Página</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="text-center">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <div className="text-3xl font-bold text-muted-foreground">2.5m</div>
-                                <div className="text-sm text-muted-foreground">Versão A</div>
-                              </div>
-                              <div>
-                                <div className="text-3xl font-bold text-primary">2.1m</div>
-                                <div className="text-sm text-muted-foreground">Versão B</div>
-                                <div className="text-xs text-red-500 flex items-center mt-1">
-                                  <TrendingDown className="h-3 w-3 mr-1" /> -16.0%
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                      
-                      <Card className="shadow-none border">
-                        <CardHeader className="pb-2">
-                          <CardTitle className="text-md">Taxa de Rejeição</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="text-center">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <div className="text-3xl font-bold text-muted-foreground">34%</div>
-                                <div className="text-sm text-muted-foreground">Versão A</div>
-                              </div>
-                              <div>
-                                <div className="text-3xl font-bold text-primary">28%</div>
-                                <div className="text-sm text-muted-foreground">Versão B</div>
-                                <div className="text-xs text-green-500 flex items-center mt-1">
-                                  <TrendingUp className="h-3 w-3 mr-1" /> -17.6%
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
-            
-            {activeView === "conversion" && (
-              <div className="space-y-8">
-                <div className="h-[400px]">
-                  <Tabs defaultValue="bar">
-                    <TabsList className="mb-4">
-                      <TabsTrigger value="bar">Gráfico de Barras</TabsTrigger>
-                      <TabsTrigger value="funnel">Funil de Conversão</TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="bar" className="h-[400px]">
-                      <BarChart
-                        data={conversionData}
-                        categories={["Conversão"]}
-                        index="name"
-                        colors={["#3b82f6"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </TabsContent>
-                    
-                    <TabsContent value="funnel" className="h-[400px]">
-                      <FunnelChart
-                        data={conversionData}
-                        category="Conversão"
-                        index="name"
-                        colors={["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </TabsContent>
-                  </Tabs>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Metas Completadas</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <BarList
-                        data={goalCompletionData.map(item => ({
-                          ...item,
-                          color: item.name === "Compra" ? "#f59e0b" : "#3b82f6"
-                        }))}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Registro na newsletter tem a maior taxa de conversão
-                    </CardFooter>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Tempo no Site</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <LineChart
-                        data={timeOnSiteData}
-                        categories={["tempo"]}
-                        index="name"
-                        colors={["#10b981"]}
-                        valueFormatter={(value) => `${value} min`}
-                      />
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      O tempo médio no site aumentou 50% nos últimos 6 meses
-                    </CardFooter>
-                  </Card>
-                </div>
-                
-                {/* New Customer Journey Visualization */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">Jornada do Cliente</CardTitle>
-                    <CardDescription>Análise do funil completo de conversão</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-[300px]">
-                      <FunnelChart
-                        data={customerJourneyData}
-                        category="value"
-                        index="name"
-                        colors={["#3b82f6", "#8b5cf6", "#f59e0b", "#10b981", "#f43f5e"]}
-                        valueFormatter={(value) => value.toString()}
-                      />
-                    </div>
-                  </CardContent>
-                  <CardFooter className="text-sm text-muted-foreground flex items-center gap-2">
-                    <Info className="h-4 w-4 text-muted-foreground" />
-                    22% dos clientes que iniciam o processo se tornam advogados da marca
-                  </CardFooter>
-                </Card>
-                
-                {/* New Order Value Metrics */}
-                <div className="grid md:grid-cols-3 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Valor Médio de Pedido</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="h-[200px]">
-                        <LineChart
-                          data={averageOrderData}
-                          categories={["valor"]}
-                          index="name"
-                          colors={["#8b5cf6"]}
-                          valueFormatter={(value) => `R$${value}`}
-                        />
-                      </div>
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Aumento de 40% no valor médio em 6 meses
-                    </CardFooter>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">NPS</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="flex flex-col items-center gap-4">
-                        <GaugeChart
-                          value={82}
-                          min={0}
-                          max={100}
-                          color="#10b981"
-                          className="h-[150px]"
-                        />
-                        <div className="text-center">
-                          <div className="text-xs text-green-500 flex items-center justify-center">
-                            <TrendingUp className="h-3 w-3 mr-1" /> +15 pontos em 6 meses
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Tendência NPS</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="h-[200px]">
-                        <LineChart
-                          data={npsData}
-                          categories={["score"]}
-                          index="name"
-                          colors={["#10b981"]}
-                          valueFormatter={(value) => value.toString()}
-                        />
-                      </div>
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Evolução constante do NPS nos últimos 6 meses
-                    </CardFooter>
-                  </Card>
-                </div>
-              </div>
-            )}
-            
-            {activeView === "pages" && (
-              <Tabs defaultValue="chart">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="chart">Gráfico</TabsTrigger>
-                  <TabsTrigger value="table">Tabela</TabsTrigger>
-                  <TabsTrigger value="demographics">Demografia</TabsTrigger>
-                  <TabsTrigger value="geo">Localização</TabsTrigger>
-                  <TabsTrigger value="content">Conteúdo</TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="chart" className="h-[400px]">
-                  <BarList
-                    data={topPagesData}
-                    valueFormatter={(value) => value.toLocaleString()}
-                  />
-                </TabsContent>
-                
-                <TabsContent value="table">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Página</TableHead>
-                        <TableHead className="text-right">Visualizações</TableHead>
-                        <TableHead className="text-right">Tempo Médio</TableHead>
-                        <TableHead className="text-right">Taxa de Rejeição</TableHead>
-                        <TableHead className="text-right">Tendência</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {tableData.map((item, i) => (
-                        <TableRow key={i}>
-                          <TableCell>{item.page}</TableCell>
-                          <TableCell className="text-right">{item.views.toLocaleString()}</TableCell>
-                          <TableCell className="text-right">{item.time}</TableCell>
-                          <TableCell className="text-right">{item.bounce}</TableCell>
-                          <TableCell className="text-right">
-                            {item.trend === "up" ? (
-                              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                                <TrendingUp className="h-3 w-3 mr-1" /> Alta
-                              </Badge>
-                            ) : (
-                              <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
-                                <TrendingDown className="h-3 w-3 mr-1" /> Queda
-                              </Badge>
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TabsContent>
-                
-                <TabsContent value="demographics">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Demografia de Usuários</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <BarChart
-                          data={demoData}
-                          categories={["Homens", "Mulheres"]}
-                          index="name"
-                          colors={["#3b82f6", "#f472b6"]}
-                          valueFormatter={(value) => `${value}%`}
-                        />
-                      </CardContent>
-                      <CardFooter className="text-sm text-muted-foreground">
-                        Maior engajamento entre adultos de 25-34 anos
-                      </CardFooter>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Interesses de Usuários</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <BarList
-                          data={[
-                            { name: "Tecnologia", value: 42, color: "#3b82f6" },
-                            { name: "Moda", value: 38, color: "#f472b6" },
-                            { name: "Esportes", value: 31, color: "#10b981" },
-                            { name: "Viagens", value: 28, color: "#f59e0b" },
-                            { name: "Gastronomia", value: 24, color: "#8b5cf6" }
-                          ]}
-                          valueFormatter={(value) => `${value}%`}
-                        />
-                      </CardContent>
-                      <CardFooter className="text-sm text-muted-foreground">
-                        Baseado em análise de comportamento e interesses
-                      </CardFooter>
-                    </Card>
-                  </div>
-                </TabsContent>
-                
-                <TabsContent value="geo">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Distribuição Geográfica</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <PieChart
-                          data={countryData}
-                          category="value"
-                          index="name"
-                          colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
-                          valueFormatter={(value) => `${value}%`}
-                        />
-                      </CardContent>
-                      <CardFooter className="text-sm text-muted-foreground">
-                        56% dos visitantes são do Brasil
-                      </CardFooter>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Top Cidades</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <BarList
-                          data={[
-                            { name: "São Paulo", value: 32, color: "#3b82f6" },
-                            { name: "Rio de Janeiro", value: 18, color: "#10b981" },
-                            { name: "Belo Horizonte", value: 12, color: "#f59e0b" },
-                            { name: "Brasília", value: 10, color: "#8b5cf6" },
-                            { name: "Porto Alegre", value: 8, color: "#f472b6" }
-                          ]}
-                          valueFormatter={(value) => `${value}%`}
-                        />
-                      </CardContent>
-                      <CardFooter className="text-sm text-muted-foreground">
-                        São Paulo representa 32% de todo o tráfego
-                      </CardFooter>
-                    </Card>
-                  </div>
-                </TabsContent>
-                
-                <TabsContent value="content">
-                  <div className="space-y-6">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Desempenho de Conteúdo</CardTitle>
-                        <CardDescription>Métricas de engajamento para diferentes tipos de conteúdo</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead>Conteúdo</TableHead>
-                              <TableHead className="text-right">Visualizações</TableHead>
-                              <TableHead className="text-right">Taxa Engajamento</TableHead>
-                              <TableHead className="text-right">Tempo Médio</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {contentEngagementData.map((item, i) => (
-                              <TableRow key={i}>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell className="text-right">{item.views.toLocaleString()}</TableCell>
-                                <TableCell className="text-right">{item.engRate}%</TableCell>
-                                <TableCell className="text-right">{item.avgTime} min</TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="text-lg">Engajamento por Formato</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <TreeMapChart
-                          data={[
-                            { name: "Vídeos", value: 42 },
-                            { name: "Artigos", value: 28 },
-                            { name: "Infográficos", value: 18 },
-                            { name: "E-books", value: 8 },
-                            { name: "Podcasts", value: 4 }
-                          ]}
-                          dataKey="value"
-                          colors={["#3b82f6", "#10b981", "#f59e0b", "#8b5cf6", "#f472b6"]}
-                          valueFormatter={(value) => `${value}%`}
-                          className="h-[300px]"
-                        />
-                      </CardContent>
-                      <CardFooter className="text-sm text-muted-foreground">
-                        Vídeos geram o maior engajamento entre todos os formatos
-                      </CardFooter>
-                    </Card>
-                  </div>
-                </TabsContent>
-              </Tabs>
-            )}
-            
-            {activeView === "customer" && (
-              <div className="space-y-8">
-                <div className="h-[400px]">
-                  <Tabs defaultValue="journey">
-                    <TabsList className="mb-4">
-                      <TabsTrigger value="journey">Jornada</TabsTrigger>
-                      <TabsTrigger value="satisfaction">Satisfação</TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="journey" className="h-[400px]">
-                      <FunnelChart
-                        data={customerJourneyData}
-                        category="value"
-                        index="name"
-                        colors={["#3b82f6", "#8b5cf6", "#f59e0b", "#10b981", "#f43f5e"]}
-                        valueFormatter={(value) => value.toString()}
-                      />
-                    </TabsContent>
-                    
-                    <TabsContent value="satisfaction" className="h-[400px]">
-                      <RadarChart
-                        data={[satisfactionMetrics]}
-                        categories={["valor"]}
-                        index="name"
-                        colors={["#10b981"]}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </TabsContent>
-                  </Tabs>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Score de Satisfação</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-col items-center gap-6">
-                        <GaugeChart
-                          value={85}
-                          min={0}
-                          max={100}
-                          color="#10b981"
-                          className="h-[180px]"
-                        />
-                        <div className="grid grid-cols-3 w-full text-center">
-                          <div>
-                            <div className="text-sm font-medium text-muted-foreground">NPS</div>
-                            <div className="text-xl font-bold">82</div>
-                          </div>
-                          <div>
-                            <div className="text-sm font-medium text-muted-foreground">CSAT</div>
-                            <div className="text-xl font-bold">85%</div>
-                          </div>
-                          <div>
-                            <div className="text-sm font-medium text-muted-foreground">CES</div>
-                            <div className="text-xl font-bold">4.2/5</div>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Evolução da Satisfação</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <LineChart
-                        data={npsData}
-                        categories={["score"]}
-                        index="name"
-                        colors={["#10b981"]}
-                        valueFormatter={(value) => value.toString()}
-                      />
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Aumento de 22% na satisfação nos últimos 6 meses
-                    </CardFooter>
-                  </Card>
-                </div>
-                
-                <div className="grid md:grid-cols-3 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Principais Métricas de Satisfação</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <BarList
-                        data={satisfactionMetrics.map(item => ({
-                          ...item,
-                          color: item.value > 85 ? "#10b981" : "#3b82f6"
-                        }))}
-                        valueFormatter={(value) => `${value}%`}
-                      />
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="md:col-span-2">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Análise de Feedback</CardTitle>
-                      <CardDescription>Principais temas mencionados em feedbacks de clientes</CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <TreeMapChart
-                        data={[
-                          { name: "Atendimento", value: 42 },
-                          { name: "Qualidade", value: 28 },
-                          { name: "Preço", value: 18 },
-                          { name: "Entrega", value: 16 },
-                          { name: "Usabilidade", value: 12 },
-                          { name: "Variedade", value: 8 },
-                        ]}
-                        dataKey="value"
-                        colors={["#10b981", "#3b82f6", "#f59e0b", "#8b5cf6", "#f472b6", "#f43f5e"]}
-                        valueFormatter={(value) => `${value}%`}
-                        className="h-[250px]"
-                      />
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      42% dos feedbacks mencionam a qualidade do atendimento
-                    </CardFooter>
-                  </Card>
-                </div>
-              </div>
-            )}
-            
-            {activeView === "performance" && (
-              <div className="space-y-8">
-                <div className="grid md:grid-cols-3 gap-6">
-                  <Card className="md:col-span-2">
-                    <CardHeader>
-                      <CardTitle className="text-lg">Receita Trimestral vs Meta</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <div className="h-[300px]">
-                        <BarChart
-                          data={quarterlyRevenueData}
-                          categories={["receita", "meta"]}
-                          index="name"
-                          colors={["#3b82f6", "#f59e0b"]}
-                          valueFormatter={(value) => `R$ ${(value/1000).toFixed(0)}k`}
-                        />
-                      </div>
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Q3 ficou 8.7% abaixo da meta, mas Q4 superou em 4%
-                    </CardFooter>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Desempenho de Produtos</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <ScrollArea className="h-[300px] pr-4">
-                        <Table>
-                          <TableHeader>
-                            <TableRow>
-                              <TableHead>Produto</TableHead>
-                              <TableHead className="text-right">Vendas</TableHead>
-                              <TableHead className="text-right">Rating</TableHead>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody>
-                            {productPerformanceData.map((item, i) => (
-                              <TableRow key={i}>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell className="text-right">{item.vendas}</TableCell>
-                                <TableCell className="text-right">
-                                  <div className="flex items-center justify-end gap-1">
-                                    {item.reviews}
-                                    <HoverCard>
-                                      <HoverCardTrigger>
-                                        <Info className="h-3 w-3 text-muted-foreground cursor-help" />
-                                      </HoverCardTrigger>
-                                      <HoverCardContent>
-                                        <div className="text-xs">
-                                          Taxa de recompra: {item.recompra}%
-                                        </div>
-                                      </HoverCardContent>
-                                    </HoverCard>
-                                  </div>
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </Table>
-                      </ScrollArea>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">ROI de Marketing</CardTitle>
-                      <CardDescription>Retorno sobre investimento por canal</CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Canal</TableHead>
-                            <TableHead className="text-right">Investimento</TableHead>
-                            <TableHead className="text-right">Receita</TableHead>
-                            <TableHead className="text-right">ROI</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {marketingROIData.map((item, i) => (
-                            <TableRow key={i}>
-                              <TableCell>{item.name}</TableCell>
-                              <TableCell className="text-right">R$ {item.investment}</TableCell>
-                              <TableCell className="text-right">R$ {item.revenue}</TableCell>
-                              <TableCell className="text-right">
-                                <Badge variant={item.roi > 350 ? "secondary" : "default"}>
-                                  {item.roi}%
-                                </Badge>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Mídias Sociais</CardTitle>
-                      <CardDescription>Desempenho de redes sociais</CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0">
-                      <Table>
-                        <TableHeader>
-                          <TableRow>
-                            <TableHead>Rede</TableHead>
-                            <TableHead className="text-right">Seguidores</TableHead>
-                            <TableHead className="text-right">Engajamento</TableHead>
-                            <TableHead className="text-right">Clicks</TableHead>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                          {socialMediaData.map((item, i) => (
-                            <TableRow key={i}>
-                              <TableCell>{item.name}</TableCell>
-                              <TableCell className="text-right">{item.followers.toLocaleString()}</TableCell>
-                              <TableCell className="text-right">{item.engagement}%</TableCell>
-                              <TableCell className="text-right">{item.clicks}</TableCell>
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </CardContent>
-                    <CardFooter className="text-sm text-muted-foreground">
-                      Instagram tem o maior número de seguidores e YouTube o maior engajamento
-                    </CardFooter>
-                  </Card>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-    </>
-  );
-};
-
-interface MetricCardProps {
-  title: string;
-  value: string;
-  change: string;
-  trend: "up" | "down" | "neutral";
-  icon: React.ReactNode;
-  sparklineData?: any[];
-  sparklineKey?: string;
-  sparklineColor?: string;
-  description?: string;
-}
-
-const MetricCard = ({ 
-  title, 
-  value, 
-  change, 
-  trend, 
-  icon, 
-  sparklineData, 
-  sparklineKey = "value", 
-  sparklineColor = "#3b82f6",
-  description
-}: MetricCardProps) => {
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">
-          <HoverCard>
-            <HoverCardTrigger asChild>
-              <div className="flex items-center gap-1">
-                {title}
-                {description && <Info className="h-3 w-3 text-muted-foreground cursor-help" />}
-              </div>
-            </HoverCardTrigger>
-            {description && (
-              <HoverCardContent side="top" className="text-xs w-[200px]">
-                {description}
-              </HoverCardContent>
-            )}
-          </HoverCard>
-        </CardTitle>
-        <div className="h-4 w-4 text-muted-foreground">{icon}</div>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        <div className={`
-          flex items-center text-xs mt-2
-          ${trend === "up" ? "text-green-500" : trend === "down" ? "text-red-500" : "text-muted-foreground"}
-        `}>
-          {trend === "up" ? <TrendingUp className="h-3 w-3 mr-1" /> : 
-           trend === "down" ? <TrendingDown className="h-3 w-3 mr-1" /> : null}
-          {change}
-        </div>
-        
-        {sparklineData && (
-          <div className="mt-3">
-            <SparklineChart 
-              data={sparklineData}
-              dataKey={sparklineKey}
-              color={sparklineColor}
-              height={24}
-            />
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-};
-
-export default DataVisualization;
+                        colors={["
