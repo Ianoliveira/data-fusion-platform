@@ -48,12 +48,14 @@ export const MetricCard: React.FC<MetricCardProps> = ({
         <div className="text-2xl sm:text-3xl font-bold mb-2">{value}</div>
         {sparklineData && sparklineKey && (
           <div className="h-[30px] mt-2 mb-2 w-full">
-            <SparklineChart 
-              data={sparklineData} 
-              dataKey={sparklineKey} 
-              color={sparklineColor || "#3b82f6"}
-              className="w-full h-full"
-            />
+            <div className="h-full w-full">
+              <SparklineChart 
+                data={sparklineData} 
+                dataKey={sparklineKey} 
+                color={sparklineColor || "#3b82f6"}
+                className="w-full h-full"
+              />
+            </div>
           </div>
         )}
         {description && (

@@ -161,7 +161,7 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Comportamento do Usuário</CardTitle>
           </CardHeader>
           <CardContent className="pt-0 h-[250px]">
-            <div className="h-full w-full flex justify-center">
+            <div className="h-full w-full">
               <ScatterChart
                 data={userBehaviorData}
                 xAxis="timeOnSite"
