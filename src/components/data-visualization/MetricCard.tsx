@@ -29,15 +29,15 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   description 
 }) => {
   return (
-    <Card>
+    <Card className="overflow-hidden border-border/60 hover:border-primary/30 transition-colors">
       <CardContent className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            {icon}
+            {icon && <span className="p-1.5 rounded-md bg-primary/10 text-primary">{icon}</span>}
             <span className="text-sm font-medium">{title}</span>
           </div>
           {change && (
-            <Badge variant={trend === 'up' ? 'default' : 'destructive'} className="text-xs h-5">
+            <Badge variant={trend === 'up' ? 'default' : 'destructive'} className="text-xs h-5 px-1.5">
               <span className="flex items-center gap-0.5">
                 {trend === 'up' ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                 {change}
@@ -52,6 +52,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
               data={sparklineData} 
               dataKey={sparklineKey} 
               color={sparklineColor}
+              className="opacity-80"
             />
           </div>
         )}

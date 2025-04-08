@@ -116,12 +116,12 @@ const DataVisualizationContent: React.FC = () => {
         }} />
         <ViewSwitcher activeView={activeView} onViewChange={setActiveView} />
         
-        <Card>
-          <CardHeader>
+        <Card className="border-border/60 overflow-hidden shadow-sm">
+          <CardHeader className="bg-card/50">
             <CardTitle>{getViewTitle()}</CardTitle>
             <CardDescription>{getViewDescription()}</CardDescription>
           </CardHeader>
-          <CardContent className="p-6">
+          <CardContent className="p-6 bg-gradient-to-b from-card/30 to-background">
             {renderActiveView()}
           </CardContent>
         </Card>

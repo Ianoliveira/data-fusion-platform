@@ -68,13 +68,15 @@ export const ViewSwitcher: React.FC<ViewSwitcherProps> = ({ activeView, onViewCh
         <Card 
           key={option.id}
           className={`cursor-pointer transition md:col-span-1 ${
-            activeView === option.id ? "ring-2 ring-primary" : "hover:border-primary/50"
+            activeView === option.id ? "ring-2 ring-primary border-primary/70 bg-primary/5" : "hover:border-primary/50 hover:bg-muted/30"
           }`}
           onClick={() => onViewChange(option.id)}
         >
           <CardHeader className="pb-2">
             <CardTitle className="text-md flex items-center">
-              {option.icon}
+              <span className={`${activeView === option.id ? "text-primary" : "text-muted-foreground"} mr-2`}>
+                {option.icon}
+              </span>
               {option.title}
             </CardTitle>
           </CardHeader>

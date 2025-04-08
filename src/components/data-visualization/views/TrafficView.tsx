@@ -35,48 +35,54 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[400px] w-full">
-        <Tabs defaultValue="area">
-          <TabsList className="mb-4">
+      <div className="h-[400px] w-full bg-card/30 rounded-xl overflow-hidden border border-border/40">
+        <Tabs defaultValue="area" className="w-full h-full">
+          <TabsList className="mb-4 p-1 mx-4 mt-4 bg-background/80 backdrop-blur-sm">
             <TabsTrigger value="area">Gráfico de Área</TabsTrigger>
             <TabsTrigger value="line">Gráfico de Linha</TabsTrigger>
             <TabsTrigger value="daily">Tráfego Diário</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="area" className="h-[400px]">
+          <TabsContent value="area" className="h-[340px]">
             <AreaChart
               data={trafficData}
               categories={["Sessões", "Usuários"]}
               index="name"
               colors={["#3b82f6", "#10b981"]}
               valueFormatter={(value) => value.toLocaleString()}
+              showLegend={true}
+              className="h-full p-2"
             />
           </TabsContent>
           
-          <TabsContent value="line" className="h-[400px]">
+          <TabsContent value="line" className="h-[340px]">
             <LineChart
               data={trafficData}
               categories={["Sessões", "Usuários"]}
               index="name"
               colors={["#3b82f6", "#10b981"]}
               valueFormatter={(value) => value.toLocaleString()}
+              showLegend={true}
+              className="h-full p-2"
             />
           </TabsContent>
           
-          <TabsContent value="daily" className="h-[400px]">
+          <TabsContent value="daily" className="h-[340px]">
             <BarChart
               data={trafficByDayData}
               categories={["Orgânico", "Pago", "Social", "Email", "Direto"]}
               index="name"
               colors={["#3b82f6", "#f59e0b", "#8b5cf6", "#10b981", "#f43f5e"]}
               valueFormatter={(value) => value.toLocaleString()}
+              showLegend={true}
+              className="h-full p-2"
             />
           </TabsContent>
         </Tabs>
       </div>
       
       <div className="grid md:grid-cols-2 gap-6">
-        <Card>
+        <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Origens de Tráfego</CardTitle>
           </CardHeader>
@@ -88,6 +94,7 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
                 index="name"
                 colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
                 valueFormatter={(value) => `${value}%`}
+                showLegend={true}
               />
             </div>
           </CardContent>
@@ -96,7 +103,7 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
           </CardFooter>
         </Card>
         
-        <Card>
+        <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Usuários Novos vs Retorno</CardTitle>
           </CardHeader>
@@ -108,6 +115,8 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
                 index="name"
                 colors={["#8b5cf6", "#f59e0b"]}
                 valueFormatter={(value) => `${value}%`}
+                showLegend={true}
+                showGridLines={true}
               />
             </div>
           </CardContent>
@@ -118,7 +127,7 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
       </div>
       
       <div className="grid md:grid-cols-3 gap-6">
-        <Card>
+        <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Localização</CardTitle>
           </CardHeader>
@@ -130,12 +139,13 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
                 index="name"
                 colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
                 valueFormatter={(value) => `${value}%`}
+                showLegend={true}
               />
             </div>
           </CardContent>
         </Card>
         
-        <Card>
+        <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Comportamento do Usuário</CardTitle>
           </CardHeader>
@@ -157,7 +167,7 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
           </CardFooter>
         </Card>
         
-        <Card>
+        <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Top Cidades</CardTitle>
           </CardHeader>

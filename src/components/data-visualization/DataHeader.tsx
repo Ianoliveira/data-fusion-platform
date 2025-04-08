@@ -15,7 +15,7 @@ interface DataHeaderProps {
 
 export const DataHeader: React.FC<DataHeaderProps> = ({ dateRange, setDateRange }) => {
   return (
-    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-2 border-b border-border/40 mb-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight flex items-center">
           <BarChart3 className="mr-2 h-6 w-6 text-primary" />
@@ -26,7 +26,7 @@ export const DataHeader: React.FC<DataHeaderProps> = ({ dateRange, setDateRange 
         </p>
       </div>
       <div className="flex items-center gap-2">
-        <div className="flex gap-1 border rounded-lg p-0.5">
+        <div className="flex gap-1 border rounded-lg p-0.5 bg-background shadow-sm">
           <Button 
             variant={dateRange === "7d" ? "default" : "ghost"} 
             size="sm" 
