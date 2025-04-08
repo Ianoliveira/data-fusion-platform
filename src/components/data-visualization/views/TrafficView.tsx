@@ -34,16 +34,18 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
   } = data;
 
   return (
-    <div className="space-y-8">
-      <div className="h-[400px] w-full bg-card/30 rounded-xl overflow-hidden border border-border/40">
-        <Tabs defaultValue="area" className="w-full h-full">
-          <TabsList className="mb-4 p-1 mx-4 mt-4 bg-background/80 backdrop-blur-sm">
-            <TabsTrigger value="area">Gráfico de Área</TabsTrigger>
-            <TabsTrigger value="line">Gráfico de Linha</TabsTrigger>
-            <TabsTrigger value="daily">Tráfego Diário</TabsTrigger>
-          </TabsList>
+    <div className="space-y-6">
+      <div className="h-[400px] w-full bg-card/30 rounded-lg border border-border/40">
+        <Tabs defaultValue="area" className="h-full">
+          <div className="px-4 pt-4">
+            <TabsList className="mb-4 p-1 bg-background/80 backdrop-blur-sm">
+              <TabsTrigger value="area">Gráfico de Área</TabsTrigger>
+              <TabsTrigger value="line">Gráfico de Linha</TabsTrigger>
+              <TabsTrigger value="daily">Tráfego Diário</TabsTrigger>
+            </TabsList>
+          </div>
           
-          <TabsContent value="area" className="h-[340px]">
+          <TabsContent value="area" className="h-[340px] px-2">
             <AreaChart
               data={trafficData}
               categories={["Sessões", "Usuários"]}
@@ -51,11 +53,11 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
               colors={["#3b82f6", "#10b981"]}
               valueFormatter={(value) => value.toLocaleString()}
               showLegend={true}
-              className="h-full p-2"
+              className="h-full"
             />
           </TabsContent>
           
-          <TabsContent value="line" className="h-[340px]">
+          <TabsContent value="line" className="h-[340px] px-2">
             <LineChart
               data={trafficData}
               categories={["Sessões", "Usuários"]}
@@ -63,11 +65,11 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
               colors={["#3b82f6", "#10b981"]}
               valueFormatter={(value) => value.toLocaleString()}
               showLegend={true}
-              className="h-full p-2"
+              className="h-full"
             />
           </TabsContent>
           
-          <TabsContent value="daily" className="h-[340px]">
+          <TabsContent value="daily" className="h-[340px] px-2">
             <BarChart
               data={trafficByDayData}
               categories={["Orgânico", "Pago", "Social", "Email", "Direto"]}
@@ -75,30 +77,29 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
               colors={["#3b82f6", "#f59e0b", "#8b5cf6", "#10b981", "#f43f5e"]}
               valueFormatter={(value) => value.toLocaleString()}
               showLegend={true}
-              className="h-full p-2"
+              className="h-full"
             />
           </TabsContent>
         </Tabs>
       </div>
       
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Origens de Tráfego</CardTitle>
           </CardHeader>
-          <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
-              <DonutChart
-                data={acquisitionData}
-                category="value"
-                index="name"
-                colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
-                valueFormatter={(value) => `${value}%`}
-                showLegend={true}
-              />
-            </div>
+          <CardContent className="pt-0 h-[300px]">
+            <DonutChart
+              data={acquisitionData}
+              category="value"
+              index="name"
+              colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
+              valueFormatter={(value) => `${value}%`}
+              showLegend={true}
+              className="h-full"
+            />
           </CardContent>
-          <CardFooter className="text-sm text-muted-foreground">
+          <CardFooter className="text-xs text-muted-foreground">
             42% do tráfego vem de pesquisa orgânica
           </CardFooter>
         </Card>
@@ -107,41 +108,39 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
           <CardHeader>
             <CardTitle className="text-lg">Usuários Novos vs Retorno</CardTitle>
           </CardHeader>
-          <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
-              <LineChart
-                data={userEngagementData}
-                categories={["Retorno", "Novos"]}
-                index="name"
-                colors={["#8b5cf6", "#f59e0b"]}
-                valueFormatter={(value) => `${value}%`}
-                showLegend={true}
-                showGridLines={true}
-              />
-            </div>
+          <CardContent className="pt-0 h-[300px]">
+            <LineChart
+              data={userEngagementData}
+              categories={["Retorno", "Novos"]}
+              index="name"
+              colors={["#8b5cf6", "#f59e0b"]}
+              valueFormatter={(value) => `${value}%`}
+              showLegend={true}
+              showGridLines={true}
+              className="h-full"
+            />
           </CardContent>
-          <CardFooter className="text-sm text-muted-foreground">
+          <CardFooter className="text-xs text-muted-foreground">
             Tendência de aumento de 23% em usuários recorrentes
           </CardFooter>
         </Card>
       </div>
       
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="overflow-hidden border-border/60">
           <CardHeader>
             <CardTitle className="text-lg">Localização</CardTitle>
           </CardHeader>
-          <CardContent className="pt-0">
-            <div className="h-[250px] w-full">
-              <PieChart
-                data={countryData}
-                category="value"
-                index="name"
-                colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
-                valueFormatter={(value) => `${value}%`}
-                showLegend={true}
-              />
-            </div>
+          <CardContent className="pt-0 h-[250px]">
+            <PieChart
+              data={countryData}
+              category="value"
+              index="name"
+              colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
+              valueFormatter={(value) => `${value}%`}
+              showLegend={true}
+              className="h-full"
+            />
           </CardContent>
         </Card>
         
@@ -149,20 +148,19 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
           <CardHeader>
             <CardTitle className="text-lg">Comportamento do Usuário</CardTitle>
           </CardHeader>
-          <CardContent className="pt-0">
-            <div className="h-[250px] w-full">
-              <ScatterChart
-                data={userBehaviorData}
-                xAxis="timeOnSite"
-                yAxis="pagesViewed"
-                zAxis="value"
-                name="Comportamento"
-                color="#3b82f6"
-                valueFormatter={(value) => value.toString()}
-              />
-            </div>
+          <CardContent className="pt-0 h-[250px]">
+            <ScatterChart
+              data={userBehaviorData}
+              xAxis="timeOnSite"
+              yAxis="pagesViewed"
+              zAxis="value"
+              name="Comportamento"
+              color="#3b82f6"
+              valueFormatter={(value) => value.toString()}
+              className="h-full"
+            />
           </CardContent>
-          <CardFooter className="text-sm text-muted-foreground">
+          <CardFooter className="text-xs text-muted-foreground">
             Correlação entre tempo no site e páginas vistas
           </CardFooter>
         </Card>

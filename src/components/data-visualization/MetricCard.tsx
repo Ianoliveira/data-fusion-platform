@@ -29,12 +29,12 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   description 
 }) => {
   return (
-    <Card className="overflow-hidden border-border/60 hover:border-primary/30 transition-colors">
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-4">
+    <Card className="overflow-hidden border-border/60 hover:border-primary/30 transition-colors h-full">
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             {icon && <span className="p-1.5 rounded-md bg-primary/10 text-primary">{icon}</span>}
-            <span className="text-sm font-medium">{title}</span>
+            <span className="text-sm font-medium text-muted-foreground">{title}</span>
           </div>
           {change && (
             <Badge variant={trend === 'up' ? 'default' : 'destructive'} className="text-xs h-5 px-1.5">
@@ -45,19 +45,19 @@ export const MetricCard: React.FC<MetricCardProps> = ({
             </Badge>
           )}
         </div>
-        <div className="text-3xl font-bold mb-2">{value}</div>
+        <div className="text-2xl sm:text-3xl font-bold mb-2">{value}</div>
         {sparklineData && sparklineKey && (
-          <div className="h-[30px] mb-2">
+          <div className="h-[30px] mt-2 mb-2 w-full">
             <SparklineChart 
               data={sparklineData} 
               dataKey={sparklineKey} 
-              color={sparklineColor}
-              className="opacity-80"
+              color={sparklineColor || "#3b82f6"}
+              className="w-full"
             />
           </div>
         )}
         {description && (
-          <div className="text-xs text-muted-foreground">{description}</div>
+          <div className="text-xs text-muted-foreground mt-1">{description}</div>
         )}
       </CardContent>
     </Card>

@@ -14,7 +14,7 @@ export const KPIDashboard: React.FC<KPIDashboardProps> = ({ data }) => {
   const { trafficTrendSparkline, conversionTrendSparkline } = data;
   
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <MetricCard 
         title="Sessões Totais" 
         value="142,854"
