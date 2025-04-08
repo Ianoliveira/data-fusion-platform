@@ -4,10 +4,10 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/componen
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { 
   BarChart, 
-  LineChart, 
-  GaugeChart, 
-  TreeMapChart 
+  LineChart 
 } from "@/components/ui/chart";
+import { GaugeChart } from "@/components/ui/chart/chart-types/circular-charts";
+import { TreeMapChart } from "@/components/ui/chart/chart-types/advanced-charts";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ScrollArea } from "@/components/ui/scroll-area";
 

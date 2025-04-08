@@ -1,7 +1,8 @@
 
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { PieChart, ScatterChart, BarList } from "@/components/ui/chart";
+import { PieChart, ScatterChart } from "@/components/ui/chart";
+import { BarList } from "@/components/ui/chart/chart-types/basic-charts";
 
 interface TrafficLocationSectionProps {
   countryData: any[];
