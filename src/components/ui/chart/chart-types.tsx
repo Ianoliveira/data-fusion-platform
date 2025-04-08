@@ -33,12 +33,12 @@ export const AreaChart: React.FC<AreaChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.AreaChart data={data}>
+      <RechartsPrimitive.AreaChart data={data} margin={{ top: 10, right: 30, left: 20, bottom: 20 }}>
         {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />}
         {showXAxis && <RechartsPrimitive.XAxis dataKey={index} />}
         {showYAxis && <RechartsPrimitive.YAxis />}
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
-        {showLegend && <RechartsPrimitive.Legend />}
+        {showLegend && <RechartsPrimitive.Legend wrapperStyle={{ paddingTop: "10px" }} />}
         {categories.map((category, i) => (
           <RechartsPrimitive.Area
             key={category}
@@ -72,12 +72,12 @@ export const BarChart: React.FC<BarChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+      <RechartsPrimitive.BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
         {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" vertical={false} />}
         {showXAxis && <RechartsPrimitive.XAxis dataKey={index} axisLine={false} tickLine={false} />}
         {showYAxis && <RechartsPrimitive.YAxis axisLine={false} tickLine={false} />}
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
-        {showLegend && <RechartsPrimitive.Legend />}
+        {showLegend && <RechartsPrimitive.Legend wrapperStyle={{ paddingTop: "10px" }} />}
         {categories.map((category, i) => (
           <RechartsPrimitive.Bar
             key={category}
@@ -96,7 +96,6 @@ interface LineChartProps extends CustomChartProps {
   categories: string[];
 }
 
-// Added new Line Chart component
 export const LineChart: React.FC<LineChartProps> = ({
   data,
   categories,
@@ -111,12 +110,12 @@ export const LineChart: React.FC<LineChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.LineChart data={data}>
+      <RechartsPrimitive.LineChart data={data} margin={{ top: 10, right: 30, left: 20, bottom: 20 }}>
         {showGridLines && <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />}
         {showXAxis && <RechartsPrimitive.XAxis dataKey={index} />}
         {showYAxis && <RechartsPrimitive.YAxis />}
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
-        {showLegend && <RechartsPrimitive.Legend />}
+        {showLegend && <RechartsPrimitive.Legend wrapperStyle={{ paddingTop: "10px" }} />}
         {categories.map((category, i) => (
           <RechartsPrimitive.Line
             key={category}
@@ -148,7 +147,7 @@ export const PieChart: React.FC<PieChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 30, left: 10 }}>
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
         {showLegend && <RechartsPrimitive.Legend layout="horizontal" verticalAlign="bottom" align="center" />}
         <RechartsPrimitive.Pie
@@ -156,7 +155,7 @@ export const PieChart: React.FC<PieChartProps> = ({
           dataKey={category}
           nameKey={index}
           cx="50%"
-          cy="50%"
+          cy="45%"
           outerRadius={80}
           label={(entry) => entry.name}
           labelLine={false}
@@ -174,7 +173,6 @@ export const PieChart: React.FC<PieChartProps> = ({
   );
 };
 
-// Added new Donut Chart component
 export const DonutChart: React.FC<PieChartProps> = ({
   data,
   category,
@@ -186,7 +184,7 @@ export const DonutChart: React.FC<PieChartProps> = ({
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 10, left: 10 }}>
+      <RechartsPrimitive.PieChart margin={{ top: 10, right: 10, bottom: 30, left: 10 }}>
         <RechartsPrimitive.Tooltip formatter={valueFormatter} />
         {showLegend && <RechartsPrimitive.Legend layout="horizontal" verticalAlign="bottom" align="center" />}
         <RechartsPrimitive.Pie
@@ -194,7 +192,7 @@ export const DonutChart: React.FC<PieChartProps> = ({
           dataKey={category}
           nameKey={index}
           cx="50%"
-          cy="50%"
+          cy="45%"
           innerRadius={60}
           outerRadius={80}
           label={false}
@@ -212,7 +210,6 @@ export const DonutChart: React.FC<PieChartProps> = ({
   );
 };
 
-// Added new Sparkline Chart for compact trend visualization
 export const SparklineChart: React.FC<{
   data: any[];
   dataKey: string;
@@ -243,7 +240,6 @@ export const SparklineChart: React.FC<{
   );
 };
 
-// New components for enhanced visualizations
 export const RadarChart: React.FC<{
   data: any[];
   categories: string[];
@@ -261,7 +257,7 @@ export const RadarChart: React.FC<{
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.RadarChart data={data} margin={{ top: 10, right: 30, left: 30, bottom: 10 }}>
+      <RechartsPrimitive.RadarChart data={data} margin={{ top: 20, right: 30, left: 30, bottom: 20 }}>
         <RechartsPrimitive.PolarGrid />
         <RechartsPrimitive.PolarAngleAxis dataKey={index} />
         <RechartsPrimitive.PolarRadiusAxis />
@@ -305,7 +301,7 @@ export const FunnelChart: React.FC<{
       <RechartsPrimitive.BarChart 
         data={sortedData} 
         layout="vertical" 
-        margin={{ top: 20, right: 30, left: 60, bottom: 5 }}
+        margin={{ top: 20, right: 30, left: 60, bottom: 20 }}
       >
         <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
         <RechartsPrimitive.XAxis type="number" />
@@ -345,7 +341,7 @@ export const ScatterChart: React.FC<{
 }) => {
   return (
     <ChartContainer config={{}} className={className}>
-      <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
+      <RechartsPrimitive.ScatterChart margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
         <RechartsPrimitive.CartesianGrid strokeDasharray="3 3" />
         <RechartsPrimitive.XAxis dataKey={xAxis} name={xAxis} />
         <RechartsPrimitive.YAxis dataKey={yAxis} name={yAxis} />

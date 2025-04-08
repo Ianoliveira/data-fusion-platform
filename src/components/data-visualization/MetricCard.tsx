@@ -52,7 +52,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
               data={sparklineData} 
               dataKey={sparklineKey} 
               color={sparklineColor || "#3b82f6"}
-              className="w-full"
+              className="w-full h-full"
             />
           </div>
         )}

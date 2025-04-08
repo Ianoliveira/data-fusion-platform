@@ -39,18 +39,20 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
             <TabsTrigger value="speed">Velocidade de Carregamento</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="bar" className="h-[400px]">
-            <BarChart
-              data={topPagesData}
-              categories={["value"]}
-              index="name"
-              colors={["#3b82f6"]}
-              valueFormatter={(value) => value.toLocaleString()}
-            />
+          <TabsContent value="bar" className="h-[350px]">
+            <div className="h-full w-full">
+              <BarChart
+                data={topPagesData}
+                categories={["value"]}
+                index="name"
+                colors={["#3b82f6"]}
+                valueFormatter={(value) => value.toLocaleString()}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="table" className="h-[400px]">
-            <ScrollArea className="h-[400px]">
+          <TabsContent value="table" className="h-[350px]">
+            <ScrollArea className="h-[350px]">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -82,14 +84,16 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
             </ScrollArea>
           </TabsContent>
           
-          <TabsContent value="speed" className="h-[400px]">
-            <BarChart
-              data={pageSpeedData}
-              categories={["Carregamento", "Renderização"]}
-              index="name"
-              colors={["#3b82f6", "#10b981"]}
-              valueFormatter={(value) => `${value}s`}
-            />
+          <TabsContent value="speed" className="h-[350px]">
+            <div className="h-full w-full">
+              <BarChart
+                data={pageSpeedData}
+                categories={["Carregamento", "Renderização"]}
+                index="name"
+                colors={["#3b82f6", "#10b981"]}
+                valueFormatter={(value) => `${value}s`}
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </div>

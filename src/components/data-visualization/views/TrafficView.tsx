@@ -46,39 +46,45 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
           </div>
           
           <TabsContent value="area" className="h-[340px] px-2">
-            <AreaChart
-              data={trafficData}
-              categories={["Sessões", "Usuários"]}
-              index="name"
-              colors={["#3b82f6", "#10b981"]}
-              valueFormatter={(value) => value.toLocaleString()}
-              showLegend={true}
-              className="h-full"
-            />
+            <div className="h-full w-full">
+              <AreaChart
+                data={trafficData}
+                categories={["Sessões", "Usuários"]}
+                index="name"
+                colors={["#3b82f6", "#10b981"]}
+                valueFormatter={(value) => value.toLocaleString()}
+                showLegend={true}
+                className="h-full"
+              />
+            </div>
           </TabsContent>
           
           <TabsContent value="line" className="h-[340px] px-2">
-            <LineChart
-              data={trafficData}
-              categories={["Sessões", "Usuários"]}
-              index="name"
-              colors={["#3b82f6", "#10b981"]}
-              valueFormatter={(value) => value.toLocaleString()}
-              showLegend={true}
-              className="h-full"
-            />
+            <div className="h-full w-full">
+              <LineChart
+                data={trafficData}
+                categories={["Sessões", "Usuários"]}
+                index="name"
+                colors={["#3b82f6", "#10b981"]}
+                valueFormatter={(value) => value.toLocaleString()}
+                showLegend={true}
+                className="h-full"
+              />
+            </div>
           </TabsContent>
           
           <TabsContent value="daily" className="h-[340px] px-2">
-            <BarChart
-              data={trafficByDayData}
-              categories={["Orgânico", "Pago", "Social", "Email", "Direto"]}
-              index="name"
-              colors={["#3b82f6", "#f59e0b", "#8b5cf6", "#10b981", "#f43f5e"]}
-              valueFormatter={(value) => value.toLocaleString()}
-              showLegend={true}
-              className="h-full"
-            />
+            <div className="h-full w-full">
+              <BarChart
+                data={trafficByDayData}
+                categories={["Orgânico", "Pago", "Social", "Email", "Direto"]}
+                index="name"
+                colors={["#3b82f6", "#f59e0b", "#8b5cf6", "#10b981", "#f43f5e"]}
+                valueFormatter={(value) => value.toLocaleString()}
+                showLegend={true}
+                className="h-full"
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
@@ -89,15 +95,17 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Origens de Tráfego</CardTitle>
           </CardHeader>
           <CardContent className="pt-0 h-[300px]">
-            <DonutChart
-              data={acquisitionData}
-              category="value"
-              index="name"
-              colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
-              valueFormatter={(value) => `${value}%`}
-              showLegend={true}
-              className="h-full"
-            />
+            <div className="h-full w-full">
+              <DonutChart
+                data={acquisitionData}
+                category="value"
+                index="name"
+                colors={["#8b5cf6", "#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
+                valueFormatter={(value) => `${value}%`}
+                showLegend={true}
+                className="h-full"
+              />
+            </div>
           </CardContent>
           <CardFooter className="text-xs text-muted-foreground">
             42% do tráfego vem de pesquisa orgânica
@@ -109,16 +117,18 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Usuários Novos vs Retorno</CardTitle>
           </CardHeader>
           <CardContent className="pt-0 h-[300px]">
-            <LineChart
-              data={userEngagementData}
-              categories={["Retorno", "Novos"]}
-              index="name"
-              colors={["#8b5cf6", "#f59e0b"]}
-              valueFormatter={(value) => `${value}%`}
-              showLegend={true}
-              showGridLines={true}
-              className="h-full"
-            />
+            <div className="h-full w-full">
+              <LineChart
+                data={userEngagementData}
+                categories={["Retorno", "Novos"]}
+                index="name"
+                colors={["#8b5cf6", "#f59e0b"]}
+                valueFormatter={(value) => `${value}%`}
+                showLegend={true}
+                showGridLines={true}
+                className="h-full"
+              />
+            </div>
           </CardContent>
           <CardFooter className="text-xs text-muted-foreground">
             Tendência de aumento de 23% em usuários recorrentes
@@ -132,15 +142,17 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Localização</CardTitle>
           </CardHeader>
           <CardContent className="pt-0 h-[250px]">
-            <PieChart
-              data={countryData}
-              category="value"
-              index="name"
-              colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
-              valueFormatter={(value) => `${value}%`}
-              showLegend={true}
-              className="h-full"
-            />
+            <div className="h-full w-full">
+              <PieChart
+                data={countryData}
+                category="value"
+                index="name"
+                colors={["#3b82f6", "#f59e0b", "#10b981", "#8b5cf6"]}
+                valueFormatter={(value) => `${value}%`}
+                showLegend={true}
+                className="h-full"
+              />
+            </div>
           </CardContent>
         </Card>
         
@@ -149,16 +161,18 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Comportamento do Usuário</CardTitle>
           </CardHeader>
           <CardContent className="pt-0 h-[250px]">
-            <ScatterChart
-              data={userBehaviorData}
-              xAxis="timeOnSite"
-              yAxis="pagesViewed"
-              zAxis="value"
-              name="Comportamento"
-              color="#3b82f6"
-              valueFormatter={(value) => value.toString()}
-              className="h-full"
-            />
+            <div className="h-full w-full flex justify-center">
+              <ScatterChart
+                data={userBehaviorData}
+                xAxis="timeOnSite"
+                yAxis="pagesViewed"
+                zAxis="value"
+                name="Comportamento"
+                color="#3b82f6"
+                valueFormatter={(value) => value.toString()}
+                className="h-full"
+              />
+            </div>
           </CardContent>
           <CardFooter className="text-xs text-muted-foreground">
             Correlação entre tempo no site e páginas vistas
@@ -169,17 +183,19 @@ export const TrafficView: React.FC<TrafficViewProps> = ({ data }) => {
           <CardHeader>
             <CardTitle className="text-lg">Top Cidades</CardTitle>
           </CardHeader>
-          <CardContent className="pt-0">
-            <BarList
-              data={[
-                { name: "São Paulo", value: 32, color: "#3b82f6" },
-                { name: "Rio de Janeiro", value: 18, color: "#10b981" },
-                { name: "Belo Horizonte", value: 12, color: "#f59e0b" },
-                { name: "Brasília", value: 10, color: "#8b5cf6" },
-                { name: "Porto Alegre", value: 8, color: "#f472b6" }
-              ]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <CardContent className="pt-0 h-[250px] flex items-center">
+            <div className="w-full">
+              <BarList
+                data={[
+                  { name: "São Paulo", value: 32, color: "#3b82f6" },
+                  { name: "Rio de Janeiro", value: 18, color: "#10b981" },
+                  { name: "Belo Horizonte", value: 12, color: "#f59e0b" },
+                  { name: "Brasília", value: 10, color: "#8b5cf6" },
+                  { name: "Porto Alegre", value: 8, color: "#f472b6" }
+                ]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </CardContent>
         </Card>
       </div>

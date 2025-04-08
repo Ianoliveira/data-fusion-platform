@@ -40,34 +40,40 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <TabsTrigger value="nps">NPS</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="satisfaction" className="h-[400px]">
-            <BarChart
-              data={satisfactionMetrics}
-              categories={["value"]}
-              index="name"
-              colors={["#10b981"]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <TabsContent value="satisfaction" className="h-[350px]">
+            <div className="h-full w-full">
+              <BarChart
+                data={satisfactionMetrics}
+                categories={["value"]}
+                index="name"
+                colors={["#10b981"]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="journey" className="h-[400px]">
-            <FunnelChart
-              data={customerJourneyData}
-              category="value"
-              index="name"
-              colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
-              valueFormatter={(value) => value.toString()}
-            />
+          <TabsContent value="journey" className="h-[350px]">
+            <div className="h-full w-full">
+              <FunnelChart
+                data={customerJourneyData}
+                category="value"
+                index="name"
+                colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
+                valueFormatter={(value) => value.toString()}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="nps" className="h-[400px]">
-            <LineChart
-              data={npsData}
-              categories={["score"]}
-              index="name"
-              colors={["#10b981"]}
-              valueFormatter={(value) => value.toString()}
-            />
+          <TabsContent value="nps" className="h-[350px]">
+            <div className="h-full w-full">
+              <LineChart
+                data={npsData}
+                categories={["score"]}
+                index="name"
+                colors={["#10b981"]}
+                valueFormatter={(value) => value.toString()}
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </div>

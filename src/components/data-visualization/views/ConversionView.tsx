@@ -37,34 +37,40 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
             <TabsTrigger value="goals">Metas</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="funnel" className="h-[400px]">
-            <FunnelChart
-              data={conversionData}
-              category="Conversão"
-              index="name"
-              colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <TabsContent value="funnel" className="h-[350px]">
+            <div className="h-full w-full">
+              <FunnelChart
+                data={conversionData}
+                category="Conversão"
+                index="name"
+                colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e"]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="journey" className="h-[400px]">
-            <FunnelChart
-              data={customerJourneyData}
-              category="value"
-              index="name"
-              colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
-              valueFormatter={(value) => value.toString()}
-            />
+          <TabsContent value="journey" className="h-[350px]">
+            <div className="h-full w-full">
+              <FunnelChart
+                data={customerJourneyData}
+                category="value"
+                index="name"
+                colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
+                valueFormatter={(value) => value.toString()}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="goals" className="h-[400px]">
-            <BarChart
-              data={goalCompletionData}
-              categories={["value"]}
-              index="name"
-              colors={["#10b981"]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <TabsContent value="goals" className="h-[350px]">
+            <div className="h-full w-full">
+              <BarChart
+                data={goalCompletionData}
+                categories={["value"]}
+                index="name"
+                colors={["#10b981"]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </div>

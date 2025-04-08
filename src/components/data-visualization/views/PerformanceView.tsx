@@ -32,28 +32,32 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
             <TabsTrigger value="social">Redes Sociais</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="roi" className="h-[400px]">
-            <BarChart
-              data={marketingROIData}
-              categories={["roi"]}
-              index="name"
-              colors={["#10b981"]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <TabsContent value="roi" className="h-[350px]">
+            <div className="h-full w-full">
+              <BarChart
+                data={marketingROIData}
+                categories={["roi"]}
+                index="name"
+                colors={["#10b981"]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="revenue" className="h-[400px]">
-            <LineChart
-              data={quarterlyRevenueData}
-              categories={["receita", "meta"]}
-              index="name"
-              colors={["#3b82f6", "#f59e0b"]}
-              valueFormatter={(value) => `R$ ${(value/1000).toFixed(0)}k`}
-            />
+          <TabsContent value="revenue" className="h-[350px]">
+            <div className="h-full w-full">
+              <LineChart
+                data={quarterlyRevenueData}
+                categories={["receita", "meta"]}
+                index="name"
+                colors={["#3b82f6", "#f59e0b"]}
+                valueFormatter={(value) => `R$ ${(value/1000).toFixed(0)}k`}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="social" className="h-[400px]">
-            <ScrollArea className="h-[400px]">
+          <TabsContent value="social" className="h-[350px]">
+            <ScrollArea className="h-[350px]">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -93,7 +97,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <div className="h-[150px] w-[150px]">
+                <div className="h-[150px] w-[150px] mx-auto">
                   <GaugeChart
                     value={72}
                     min={0}
@@ -101,7 +105,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
                     color="#3b82f6"
                   />
                 </div>
-                <div className="text-xs text-muted-foreground mt-2">
+                <div className="text-xs text-muted-foreground mt-2 text-center">
                   Eficiência de Aquisição
                 </div>
               </div>

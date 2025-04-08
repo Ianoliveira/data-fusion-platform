@@ -36,34 +36,40 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <TabsTrigger value="radar">Radar de Interesses</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="pie" className="h-[400px]">
-            <PieChart
-              data={deviceData}
-              category="value"
-              index="name"
-              colors={["#3b82f6", "#10b981", "#f59e0b"]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <TabsContent value="pie" className="h-[350px]">
+            <div className="h-full w-full">
+              <PieChart
+                data={deviceData}
+                category="value"
+                index="name"
+                colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="donut" className="h-[400px]">
-            <DonutChart
-              data={deviceData}
-              category="value"
-              index="name"
-              colors={["#3b82f6", "#10b981", "#f59e0b"]}
-              valueFormatter={(value) => `${value}%`}
-            />
+          <TabsContent value="donut" className="h-[350px]">
+            <div className="h-full w-full">
+              <DonutChart
+                data={deviceData}
+                category="value"
+                index="name"
+                colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                valueFormatter={(value) => `${value}%`}
+              />
+            </div>
           </TabsContent>
           
-          <TabsContent value="radar" className="h-[400px]">
-            <RadarChart
-              data={customerInterestsData}
-              categories={["A", "B", "C"]}
-              index="category"
-              colors={["#3b82f6", "#10b981", "#f59e0b"]}
-              valueFormatter={(value) => value.toString()}
-            />
+          <TabsContent value="radar" className="h-[350px]">
+            <div className="h-full w-full">
+              <RadarChart
+                data={customerInterestsData}
+                categories={["A", "B", "C"]}
+                index="category"
+                colors={["#3b82f6", "#10b981", "#f59e0b"]}
+                valueFormatter={(value) => value.toString()}
+              />
+            </div>
           </TabsContent>
         </Tabs>
       </div>
