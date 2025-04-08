@@ -6,7 +6,7 @@ import { DataProvider, useDataVisualizationData } from "@/components/data-visual
 import { DataHeader } from "@/components/data-visualization/DataHeader";
 import { KPIDashboard } from "@/components/data-visualization/KPIDashboard";
 import { ViewSwitcher } from "@/components/data-visualization/ViewSwitcher";
-import { TrafficView } from "@/components/data-visualization/views/TrafficView";
+import { TrafficView } from "@/components/data-visualization/views/traffic";
 import { DevicesView } from "@/components/data-visualization/views/DevicesView";
 import { ConversionView } from "@/components/data-visualization/views/ConversionView";
 import { PagesView } from "@/components/data-visualization/views/PagesView";
