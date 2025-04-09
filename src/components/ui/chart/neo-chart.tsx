@@ -21,7 +21,7 @@ export function NeoChartContainer({
       className
     )}>
       <ChartContainer config={config} className="p-2">
-        {children}
+        {React.Children.only(children)}
       </ChartContainer>
     </div>
   );
