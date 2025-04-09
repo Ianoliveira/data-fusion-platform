@@ -1,7 +1,7 @@
 
 import React from "react";
 import * as RechartsPrimitive from "recharts";
-import { ChartContainer } from "../chart-base";
+import { NeoChartContainer } from "../neo-chart";
 
 export const SparklineChart: React.FC<{
   data: any[];
@@ -18,7 +18,7 @@ export const SparklineChart: React.FC<{
 }) => {
   return (
     <div className={className} style={{ height: `${height}px` }}>
-      <ChartContainer config={{}}>
+      <NeoChartContainer className="p-0">
         <RechartsPrimitive.LineChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
           <RechartsPrimitive.Line
             type="monotone"
@@ -28,7 +28,7 @@ export const SparklineChart: React.FC<{
             dot={false}
           />
         </RechartsPrimitive.LineChart>
-      </ChartContainer>
+      </NeoChartContainer>
     </div>
   );
 };
