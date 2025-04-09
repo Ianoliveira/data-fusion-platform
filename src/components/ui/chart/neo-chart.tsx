@@ -21,7 +21,7 @@ export function NeoChartContainer({
       className
     )}>
       <ChartContainer config={config} className="p-2">
-        {React.Children.only(children)}
+        {React.isValidElement(children) ? children : <div>Invalid chart content</div>}
       </ChartContainer>
     </div>
   );
