@@ -102,7 +102,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
                     value={72}
                     min={0}
                     max={100}
-                    color="#3b82f6"
+                    thresholds={[{ value: 100, color: "#3b82f6" }]}
                   />
                 </div>
                 <div className="text-xs text-muted-foreground mt-2 text-center">

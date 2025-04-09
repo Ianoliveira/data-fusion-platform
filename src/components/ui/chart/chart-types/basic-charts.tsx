@@ -62,6 +62,8 @@ export const AreaChart: React.FC<{
   valueFormatter?: (value: any) => string;
   showLegend?: boolean;
   showGridLines?: boolean;
+  showXAxis?: boolean;
+  showYAxis?: boolean;
   className?: string;
 }> = ({
   data,
@@ -71,6 +73,8 @@ export const AreaChart: React.FC<{
   valueFormatter = (value) => value.toString(),
   showLegend = false,
   showGridLines = false,
+  showXAxis = true,
+  showYAxis = true,
   className,
 }) => {
   return (
@@ -83,20 +87,24 @@ export const AreaChart: React.FC<{
             vertical={false}
           />
         )}
-        <RechartsPrimitive.XAxis 
-          dataKey={index}
-          className="text-xs text-muted-foreground"
-          tick={{ fontSize: 12 }}
-          tickLine={false}
-          axisLine={false}
-        />
-        <RechartsPrimitive.YAxis 
-          className="text-xs text-muted-foreground" 
-          tick={{ fontSize: 12 }}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={valueFormatter}
-        />
+        {showXAxis && (
+          <RechartsPrimitive.XAxis 
+            dataKey={index}
+            className="text-xs text-muted-foreground"
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+          />
+        )}
+        {showYAxis && (
+          <RechartsPrimitive.YAxis 
+            className="text-xs text-muted-foreground" 
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={valueFormatter}
+          />
+        )}
         <RechartsPrimitive.Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
@@ -176,6 +184,8 @@ export const BarChart: React.FC<{
   showLegend?: boolean;
   layout?: "vertical" | "horizontal";
   showGridLines?: boolean;
+  showXAxis?: boolean;
+  showYAxis?: boolean;
   className?: string;
 }> = ({
   data,
@@ -186,6 +196,8 @@ export const BarChart: React.FC<{
   showLegend = false,
   layout = "horizontal",
   showGridLines = false,
+  showXAxis = true,
+  showYAxis = true,
   className,
 }) => {
   const isVertical = layout === "vertical";
@@ -206,43 +218,44 @@ export const BarChart: React.FC<{
             className="stroke-muted-foreground/20" 
           />
         )}
-        {isVertical ? (
-          <>
-            <RechartsPrimitive.XAxis 
-              type="number" 
-              className="text-xs text-muted-foreground" 
-              tick={{ fontSize: 12 }}
-              tickLine={false}
-              axisLine={false}
-              tickFormatter={valueFormatter}
-            />
-            <RechartsPrimitive.YAxis 
-              type="category" 
-              dataKey={index} 
-              className="text-xs text-muted-foreground"
-              tick={{ fontSize: 12 }}
-              tickLine={false} 
-              axisLine={false}
-            />
-          </>
-        ) : (
-          <>
-            <RechartsPrimitive.XAxis 
-              dataKey={index} 
-              className="text-xs text-muted-foreground" 
-              tick={{ fontSize: 12 }}
-              tickLine={false}
-              axisLine={false}
-            />
-            <RechartsPrimitive.YAxis 
-              className="text-xs text-muted-foreground"
-              tick={{ fontSize: 12 }}
-              tickLine={false}
-              axisLine={false}
-              tickFormatter={valueFormatter}
-            />
-          </>
-        )}
+        {showXAxis && isVertical ? (
+          <RechartsPrimitive.XAxis 
+            type="number" 
+            className="text-xs text-muted-foreground" 
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={valueFormatter}
+          />
+        ) : showXAxis ? (
+          <RechartsPrimitive.XAxis 
+            dataKey={index} 
+            className="text-xs text-muted-foreground" 
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+          />
+        ) : null}
+        
+        {showYAxis && isVertical ? (
+          <RechartsPrimitive.YAxis 
+            type="category" 
+            dataKey={index} 
+            className="text-xs text-muted-foreground"
+            tick={{ fontSize: 12 }}
+            tickLine={false} 
+            axisLine={false}
+          />
+        ) : showYAxis ? (
+          <RechartsPrimitive.YAxis 
+            className="text-xs text-muted-foreground"
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={valueFormatter}
+          />
+        ) : null}
+        
         <RechartsPrimitive.Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {
@@ -320,6 +333,8 @@ export const LineChart: React.FC<{
   valueFormatter?: (value: any) => string;
   showLegend?: boolean;
   showGridLines?: boolean;
+  showXAxis?: boolean;
+  showYAxis?: boolean;
   className?: string;
 }> = ({
   data,
@@ -329,6 +344,8 @@ export const LineChart: React.FC<{
   valueFormatter = (value) => value.toString(),
   showLegend = false,
   showGridLines = false,
+  showXAxis = true,
+  showYAxis = true,
   className,
 }) => {
   return (
@@ -344,20 +361,24 @@ export const LineChart: React.FC<{
             vertical={false}
           />
         )}
-        <RechartsPrimitive.XAxis 
-          dataKey={index} 
-          className="text-xs text-muted-foreground"
-          tick={{ fontSize: 12 }}
-          tickLine={false}
-          axisLine={false}
-        />
-        <RechartsPrimitive.YAxis 
-          className="text-xs text-muted-foreground"
-          tick={{ fontSize: 12 }}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={valueFormatter}
-        />
+        {showXAxis && (
+          <RechartsPrimitive.XAxis 
+            dataKey={index} 
+            className="text-xs text-muted-foreground"
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+          />
+        )}
+        {showYAxis && (
+          <RechartsPrimitive.YAxis 
+            className="text-xs text-muted-foreground"
+            tick={{ fontSize: 12 }}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={valueFormatter}
+          />
+        )}
         <RechartsPrimitive.Tooltip
           content={({ active, payload, label }) => {
             if (active && payload && payload.length) {

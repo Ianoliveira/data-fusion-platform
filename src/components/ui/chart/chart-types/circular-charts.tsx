@@ -1,7 +1,103 @@
-
 import React from "react";
 import * as RechartsPrimitive from "recharts";
 import { NeoChartContainer } from "../neo-chart";
+
+export interface GaugeChartProps {
+  value: number;
+  min?: number;
+  max?: number;
+  thresholds?: { value: number; color: string; }[];
+  label?: string;
+  valueFormatter?: (value: number) => string;
+  className?: string;
+}
+
+export const GaugeChart: React.FC<GaugeChartProps> = ({
+  value,
+  min = 0,
+  max = 100,
+  thresholds = [],
+  label,
+  valueFormatter = (value) => `${value}%`,
+  className,
+}) => {
+  // If just a single color is provided through an old prop 'color', convert it to thresholds
+  let chartThresholds = thresholds.length ? thresholds : [{ value: max, color: "#3b82f6" }];
+  
+  // Calculate percentage for the gauge
+  const normalizedValue = ((value - min) / (max - min)) * 100;
+  
+  // Calculate the appropriate color based on thresholds
+  const getColor = () => {
+    for (const threshold of chartThresholds) {
+      if (value <= threshold.value) {
+        return threshold.color;
+      }
+    }
+    return chartThresholds[chartThresholds.length - 1]?.color || "#3b82f6";
+  };
+  
+  // Data for the gauge chart
+  const data = [
+    { name: "value", value: normalizedValue },
+    { name: "empty", value: 100 - normalizedValue }
+  ];
+  
+  return (
+    <NeoChartContainer className={className}>
+      <RechartsPrimitive.PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+        <RechartsPrimitive.Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          startAngle={180}
+          endAngle={0}
+          innerRadius="70%"
+          outerRadius="100%"
+          paddingAngle={0}
+          dataKey="value"
+        >
+          <RechartsPrimitive.Cell key={`cell-0`} fill={getColor()} />
+          <RechartsPrimitive.Cell key={`cell-1`} fill="rgba(0,0,0,0.05)" />
+        </RechartsPrimitive.Pie>
+        <RechartsPrimitive.Tooltip
+          content={({ active, payload }) => {
+            if (active && payload && payload.length && payload[0].name === "value") {
+              return (
+                <div className="rounded-lg border bg-background/95 p-2 shadow-md backdrop-blur-sm">
+                  <span className="text-sm font-medium">
+                    {valueFormatter(value)}
+                  </span>
+                </div>
+              );
+            }
+            return null;
+          }}
+        />
+        <RechartsPrimitive.Text
+          x="50%"
+          y="50%"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          className="fill-foreground text-lg font-semibold"
+        >
+          {valueFormatter(value)}
+        </RechartsPrimitive.Text>
+        {label && (
+          <RechartsPrimitive.Text
+            x="50%"
+            y="65%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            className="fill-muted-foreground text-xs"
+          >
+            {label}
+          </RechartsPrimitive.Text>
+        )}
+      </RechartsPrimitive.PieChart>
+    </NeoChartContainer>
+  );
+};
 
 export const PieChart: React.FC<{
   data: any[];
@@ -204,72 +300,6 @@ export const RadarChart: React.FC<{
           />
         ))}
       </RechartsPrimitive.RadarChart>
-    </NeoChartContainer>
-  );
-};
-
-export const GaugeChart: React.FC<{
-  value: number;
-  min?: number;
-  max?: number;
-  thresholds?: { value: number; color: string }[];
-  label?: string;
-  valueFormatter?: (value: number) => string;
-  className?: string;
-}> = ({
-  value,
-  min = 0,
-  max = 100,
-  thresholds = [
-    { value: 25, color: "#ef4444" },
-    { value: 75, color: "#f59e0b" },
-    { value: 100, color: "#10b981" },
-  ],
-  label,
-  valueFormatter = (value) => `${value}%`,
-  className,
-}) => {
-  // Get color based on value and thresholds
-  const getColor = (value: number) => {
-    const threshold = thresholds
-      .slice()
-      .sort((a, b) => a.value - b.value)
-      .find((t) => value <= t.value);
-    return threshold ? threshold.color : thresholds[thresholds.length - 1].color;
-  };
-
-  const normalizedValue = Math.max(min, Math.min(max, value));
-  const percentage = ((normalizedValue - min) / (max - min)) * 100;
-  const color = getColor(percentage);
-
-  // Create data for gauge
-  const data = [
-    { name: "value", value: percentage },
-    { name: "empty", value: 100 - percentage },
-  ];
-
-  return (
-    <NeoChartContainer className={className}>
-      <div className="flex flex-col items-center justify-center h-full">
-        <RechartsPrimitive.PieChart margin={{ top: 5, right: 5, bottom: 5, left: 5 }}>
-          <RechartsPrimitive.Pie
-            data={data}
-            dataKey="value"
-            innerRadius={70}
-            outerRadius={80}
-            startAngle={180}
-            endAngle={0}
-            cy="80%"
-          >
-            <RechartsPrimitive.Cell key="value" fill={color} />
-            <RechartsPrimitive.Cell key="empty" fill="#e5e7eb" className="dark:fill-muted/20" />
-          </RechartsPrimitive.Pie>
-        </RechartsPrimitive.PieChart>
-        <div className="absolute flex flex-col items-center mt-[-50px]">
-          <div className="text-3xl font-bold">{valueFormatter(value)}</div>
-          {label && <div className="text-sm text-muted-foreground mt-1">{label}</div>}
-        </div>
-      </div>
     </NeoChartContainer>
   );
 };
