@@ -32,7 +32,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[450px] w-full">
+      <div className="h-[500px] w-full">
         <Tabs defaultValue="satisfaction">
           <TabsList className="mb-4">
             <TabsTrigger value="satisfaction">Satisfação</TabsTrigger>
@@ -40,7 +40,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <TabsTrigger value="nps">NPS</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="satisfaction" className="h-[400px]">
+          <TabsContent value="satisfaction" className="h-[450px]">
             <div className="h-full w-full">
               <BarChart
                 data={satisfactionMetrics}
@@ -48,11 +48,12 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
                 index="name"
                 colors={["#10b981"]}
                 valueFormatter={(value) => `${value}%`}
+                className="h-full"
               />
             </div>
           </TabsContent>
           
-          <TabsContent value="journey" className="h-[400px]">
+          <TabsContent value="journey" className="h-[450px]">
             <div className="h-full w-full">
               <FunnelChart
                 data={customerJourneyData}
@@ -60,11 +61,12 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
                 index="name"
                 colors={["#3b82f6", "#10b981", "#f59e0b", "#f43f5e", "#8b5cf6"]}
                 valueFormatter={(value) => value.toString()}
+                className="h-full"
               />
             </div>
           </TabsContent>
           
-          <TabsContent value="nps" className="h-[400px]">
+          <TabsContent value="nps" className="h-[450px]">
             <div className="h-full w-full">
               <LineChart
                 data={npsData}
@@ -72,6 +74,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
                 index="name"
                 colors={["#10b981"]}
                 valueFormatter={(value) => value.toString()}
+                className="h-full"
               />
             </div>
           </TabsContent>
@@ -84,13 +87,14 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Áreas de Interesse</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[320px] w-full">
+            <div className="h-[400px] w-full">
               <RadarChart
                 data={customerInterestsData}
                 categories={["A", "B", "C"]}
                 index="category"
                 colors={["#3b82f6", "#10b981", "#f59e0b"]}
                 valueFormatter={(value) => value.toString()}
+                className="h-full"
               />
             </div>
           </CardContent>
@@ -101,7 +105,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Performance de Produtos</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <ScrollArea className="h-[320px]">
+            <ScrollArea className="h-[400px]">
               <Table>
                 <TableHeader>
                   <TableRow>

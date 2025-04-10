@@ -14,12 +14,12 @@ export const TrafficSourcesSection: React.FC<TrafficSourcesSectionProps> = ({
 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card className="overflow-hidden border-border/60 min-h-[400px]">
+      <Card className="overflow-hidden border-border/60">
         <CardHeader>
           <CardTitle className="text-lg">Origens de Tráfego</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 min-h-[320px]">
-          <div className="h-full w-full min-h-[320px]">
+        <CardContent className="pt-0">
+          <div className="h-[400px] w-full">
             <DonutChart
               data={acquisitionData}
               category="value"
@@ -36,12 +36,12 @@ export const TrafficSourcesSection: React.FC<TrafficSourcesSectionProps> = ({
         </CardFooter>
       </Card>
       
-      <Card className="overflow-hidden border-border/60 min-h-[400px]">
+      <Card className="overflow-hidden border-border/60">
         <CardHeader>
           <CardTitle className="text-lg">Usuários Novos vs Retorno</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 min-h-[320px]">
-          <div className="h-full w-full min-h-[320px]">
+        <CardContent className="pt-0">
+          <div className="h-[400px] w-full">
             <LineChart
               data={userEngagementData}
               categories={["Retorno", "Novos"]}

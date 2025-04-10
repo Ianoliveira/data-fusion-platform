@@ -28,7 +28,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[450px] w-full">
+      <div className="h-[500px] w-full">
         <Tabs defaultValue="pie">
           <TabsList className="mb-4">
             <TabsTrigger value="pie">Gráfico de Pizza</TabsTrigger>
@@ -36,7 +36,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <TabsTrigger value="radar">Radar de Interesses</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="pie" className="h-[400px]">
+          <TabsContent value="pie" className="h-[450px]">
             <div className="h-full w-full">
               <PieChart
                 data={deviceData}
@@ -44,11 +44,12 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
                 index="name"
                 colors={["#3b82f6", "#10b981", "#f59e0b"]}
                 valueFormatter={(value) => `${value}%`}
+                className="h-full"
               />
             </div>
           </TabsContent>
           
-          <TabsContent value="donut" className="h-[400px]">
+          <TabsContent value="donut" className="h-[450px]">
             <div className="h-full w-full">
               <DonutChart
                 data={deviceData}
@@ -56,11 +57,12 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
                 index="name"
                 colors={["#3b82f6", "#10b981", "#f59e0b"]}
                 valueFormatter={(value) => `${value}%`}
+                className="h-full"
               />
             </div>
           </TabsContent>
           
-          <TabsContent value="radar" className="h-[400px]">
+          <TabsContent value="radar" className="h-[450px]">
             <div className="h-full w-full">
               <RadarChart
                 data={customerInterestsData}
@@ -68,6 +70,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
                 index="category"
                 colors={["#3b82f6", "#10b981", "#f59e0b"]}
                 valueFormatter={(value) => value.toString()}
+                className="h-full"
               />
             </div>
           </TabsContent>
@@ -80,13 +83,14 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Demografia de Usuários</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[320px] w-full">
+            <div className="h-[400px] w-full">
               <BarChart
                 data={demoData}
                 categories={["Homens", "Mulheres"]}
                 index="name"
                 colors={["#3b82f6", "#f472b6"]}
                 valueFormatter={(value) => `${value}%`}
+                className="h-full"
               />
             </div>
           </CardContent>
@@ -97,13 +101,14 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Taxa de Conversão por Dispositivo</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[320px] w-full">
+            <div className="h-[400px] w-full">
               <BarChart
                 data={conversionByDeviceData}
                 categories={["Taxa"]}
                 index="name"
                 colors={["#10b981"]}
                 valueFormatter={(value) => `${value}%`}
+                className="h-full"
               />
             </div>
           </CardContent>

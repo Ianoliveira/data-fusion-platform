@@ -13,7 +13,7 @@ export const TrafficChartSection: React.FC<TrafficChartSectionProps> = ({
   trafficByDayData 
 }) => {
   return (
-    <div className="h-[400px] w-full bg-card/30 rounded-lg border border-border/40">
+    <div className="h-[500px] w-full bg-card/30 rounded-lg border border-border/40">
       <Tabs defaultValue="area" className="h-full">
         <div className="px-4 pt-4">
           <TabsList className="mb-4 p-1 bg-background/80 backdrop-blur-sm">
@@ -23,7 +23,7 @@ export const TrafficChartSection: React.FC<TrafficChartSectionProps> = ({
           </TabsList>
         </div>
         
-        <TabsContent value="area" className="h-[340px] px-2">
+        <TabsContent value="area" className="h-[450px] px-2">
           <div className="h-full w-full">
             <AreaChart
               data={trafficData}
@@ -37,7 +37,7 @@ export const TrafficChartSection: React.FC<TrafficChartSectionProps> = ({
           </div>
         </TabsContent>
         
-        <TabsContent value="line" className="h-[340px] px-2">
+        <TabsContent value="line" className="h-[450px] px-2">
           <div className="h-full w-full">
             <LineChart
               data={trafficData}
@@ -51,7 +51,7 @@ export const TrafficChartSection: React.FC<TrafficChartSectionProps> = ({
           </div>
         </TabsContent>
         
-        <TabsContent value="daily" className="h-[340px] px-2">
+        <TabsContent value="daily" className="h-[450px] px-2">
           <div className="h-full w-full">
             <BarChart
               data={trafficByDayData}

@@ -31,7 +31,7 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[450px] w-full">
+      <div className="h-[500px] w-full">
         <Tabs defaultValue="bar">
           <TabsList className="mb-4">
             <TabsTrigger value="bar">Páginas Populares</TabsTrigger>
@@ -39,7 +39,7 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
             <TabsTrigger value="speed">Velocidade de Carregamento</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="bar" className="h-[400px]">
+          <TabsContent value="bar" className="h-[450px]">
             <div className="h-full w-full">
               <BarChart
                 data={topPagesData}
@@ -47,12 +47,13 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
                 index="name"
                 colors={["#3b82f6"]}
                 valueFormatter={(value) => value.toLocaleString()}
+                className="h-full"
               />
             </div>
           </TabsContent>
           
-          <TabsContent value="table" className="h-[400px]">
-            <ScrollArea className="h-[400px]">
+          <TabsContent value="table" className="h-[450px]">
+            <ScrollArea className="h-full">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -84,7 +85,7 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
             </ScrollArea>
           </TabsContent>
           
-          <TabsContent value="speed" className="h-[400px]">
+          <TabsContent value="speed" className="h-[450px]">
             <div className="h-full w-full">
               <BarChart
                 data={pageSpeedData}
@@ -92,6 +93,7 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
                 index="name"
                 colors={["#3b82f6", "#10b981"]}
                 valueFormatter={(value) => `${value}s`}
+                className="h-full"
               />
             </div>
           </TabsContent>
@@ -104,13 +106,14 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Tempo no Site</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[320px] w-full">
+            <div className="h-[400px] w-full">
               <LineChart
                 data={timeOnSiteData}
                 categories={["tempo"]}
                 index="name"
                 colors={["#10b981"]}
                 valueFormatter={(value) => `${value} min`}
+                className="h-full"
               />
             </div>
           </CardContent>
@@ -121,7 +124,7 @@ export const PagesView: React.FC<PagesViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Engagement de Conteúdo</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <ScrollArea className="h-[320px]">
+            <ScrollArea className="h-[400px]">
               <Table>
                 <TableHeader>
                   <TableRow>

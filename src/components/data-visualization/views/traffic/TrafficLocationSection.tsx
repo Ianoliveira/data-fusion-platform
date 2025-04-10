@@ -19,8 +19,8 @@ export const TrafficLocationSection: React.FC<TrafficLocationSectionProps> = ({
         <CardHeader>
           <CardTitle className="text-lg">Localização</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 h-[250px]">
-          <div className="h-full w-full">
+        <CardContent className="pt-0">
+          <div className="h-[350px] w-full">
             <PieChart
               data={countryData}
               category="value"
@@ -38,8 +38,8 @@ export const TrafficLocationSection: React.FC<TrafficLocationSectionProps> = ({
         <CardHeader>
           <CardTitle className="text-lg">Comportamento do Usuário</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 h-[250px]">
-          <div className="h-full w-full">
+        <CardContent className="pt-0">
+          <div className="h-[350px] w-full">
             <ScatterChart
               data={userBehaviorData}
               xAxis="timeOnSite"
@@ -61,8 +61,8 @@ export const TrafficLocationSection: React.FC<TrafficLocationSectionProps> = ({
         <CardHeader>
           <CardTitle className="text-lg">Top Cidades</CardTitle>
         </CardHeader>
-        <CardContent className="pt-0 h-[250px] flex items-center">
-          <div className="w-full">
+        <CardContent className="pt-0">
+          <div className="h-[350px] w-full flex items-center">
             <BarList
               data={[
                 { name: "São Paulo", value: 32, color: "#3b82f6" },
