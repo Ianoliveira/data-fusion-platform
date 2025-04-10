@@ -27,6 +27,9 @@ export const JourneyOverviewCharts: React.FC<JourneyOverviewChartsProps> = ({
             colors={["#8b5cf6"]}
             valueFormatter={(value) => `${value} interações`}
             className="h-[300px]"
+            showGridLines={true}
+            showXAxis={true}
+            showYAxis={true}
           />
         </CardContent>
       </Card>
@@ -43,6 +46,9 @@ export const JourneyOverviewCharts: React.FC<JourneyOverviewChartsProps> = ({
             colors={["#3b82f6"]}
             valueFormatter={(value) => `${value}%`}
             className="h-[300px]"
+            showGridLines={true}
+            showXAxis={true}
+            showYAxis={true}
           />
         </CardContent>
       </Card>

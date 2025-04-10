@@ -25,7 +25,7 @@ export function NeoChartContainer({
   return (
     <div className={cn(variantStyles[variant], className)}>
       <ChartContainer config={config} className="p-2">
-        {React.isValidElement(children) ? children : <div>Invalid chart content</div>}
+        {children}
       </ChartContainer>
     </div>
   );
@@ -66,7 +66,7 @@ export function ShimmerChartContainer({
   
   return (
     <div className={cn("rounded-2xl bg-white dark:bg-apple-gray-dark shadow-apple-card", className)}>
-      {React.isValidElement(children) ? children : <div>Invalid chart content</div>}
+      {children}
     </div>
   );
 }
