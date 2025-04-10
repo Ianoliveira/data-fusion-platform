@@ -31,7 +31,8 @@ export function NeoChartContainer({
     // If it's a function (render prop pattern), execute it only if it's actually a function
     if (typeof children === 'function') {
       try {
-        return children();
+        // Use type assertion to tell TypeScript that children is callable
+        return (children as () => React.ReactNode)();
       } catch (e) {
         console.error('Error calling children as function:', e);
         return <React.Fragment>{children}</React.Fragment>;
@@ -86,7 +87,8 @@ export function ShimmerChartContainer({
     
     if (typeof children === 'function') {
       try {
-        return children();
+        // Use type assertion to tell TypeScript that children is callable
+        return (children as () => React.ReactNode)();
       } catch (e) {
         console.error('Error calling children as function:', e);
         return <React.Fragment>{children}</React.Fragment>;
