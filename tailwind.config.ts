@@ -76,6 +76,21 @@ export default {
 						800: '#1e40af',
 						900: '#0f172a',
 					}
+				},
+				apple: {
+					gray: {
+						light: '#f5f5f7',
+						dark: '#1d1d1f',
+					},
+					blue: '#0071e3',
+					indigo: '#5e5ce6',
+					purple: '#bf5af2',
+					pink: '#ff375f',
+					red: '#ff453a',
+					orange: '#ff9f0a',
+					yellow: '#ffd60a',
+					green: '#30d158',
+					teal: '#64d2ff',
 				}
 			},
 			borderRadius: {
@@ -91,6 +106,10 @@ export default {
 				'neo-button-light': '3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff',
 				'neo-button-dark': '3px 3px 6px #151921, -3px -3px 6px #252b36',
 				'neo-card': '10px 10px 20px rgba(0, 0, 0, 0.05), -10px -10px 20px rgba(255, 255, 255, 0.8)',
+				'apple-card': '0 4px 16px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.08)',
+				'apple-card-hover': '0 8px 32px rgba(0, 0, 0, 0.08), 0 16px 64px rgba(0, 0, 0, 0.12)',
+				'apple-button': '0 2px 8px rgba(0, 0, 0, 0.05)',
+				'apple-glass': '0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -116,13 +135,17 @@ export default {
 				'float': {
 					'0%, 100%': { transform: 'translateY(0)' },
 					'50%': { transform: 'translateY(-5px)' }
+				},
+				'shimmer': {
+					'100%': { transform: 'translateX(100%)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'pulse-opacity': 'pulse-opacity 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-				'float': 'float 3s ease-in-out infinite'
+				'float': 'float 3s ease-in-out infinite',
+				'shimmer': 'shimmer 1.5s infinite'
 			}
 		}
 	},

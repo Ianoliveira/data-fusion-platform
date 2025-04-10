@@ -19,13 +19,15 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-neo-button-light dark:shadow-neo-button-dark hover:shadow-neo-inset-light dark:hover:shadow-neo-inset-dark",
         ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        neo: "bg-background text-foreground shadow-neo-button-light dark:shadow-neo-button-dark hover:shadow-neo-inset-light dark:hover:shadow-neo-inset-dark"
+        neo: "bg-background text-foreground shadow-neo-button-light dark:shadow-neo-button-dark hover:shadow-neo-inset-light dark:hover:shadow-neo-inset-dark",
+        apple: "bg-apple-blue text-white hover:brightness-90 rounded-full shadow-apple-button"
       },
       size: {
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-lg px-3",
         lg: "h-11 rounded-lg px-8",
         icon: "h-10 w-10",
+        pill: "h-9 rounded-full px-5",
       },
     },
     defaultVariants: {
