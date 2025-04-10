@@ -30,7 +30,7 @@ export const MetricCard: React.FC<MetricCardProps> = ({
 }) => {
   return (
     <Card className="overflow-hidden border-border/60 hover:border-primary/30 transition-colors h-full">
-      <CardContent className="p-4 sm:p-6">
+      <CardContent className="p-4 sm:p-6 flex flex-col">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             {icon && <span className="p-1.5 rounded-md bg-primary/10 text-primary">{icon}</span>}
@@ -47,15 +47,14 @@ export const MetricCard: React.FC<MetricCardProps> = ({
         </div>
         <div className="text-2xl sm:text-3xl font-bold mb-2">{value}</div>
         {sparklineData && sparklineKey && (
-          <div className="h-[30px] mt-2 mb-2 w-full">
-            <div className="h-full w-full">
-              <SparklineChart 
-                data={sparklineData} 
-                dataKey={sparklineKey} 
-                color={sparklineColor || "#3b82f6"}
-                className="w-full h-full"
-              />
-            </div>
+          <div className="flex-grow mt-2 mb-2 min-h-[50px]">
+            <SparklineChart 
+              data={sparklineData} 
+              dataKey={sparklineKey} 
+              color={sparklineColor || "#3b82f6"}
+              className="w-full h-full"
+              height={50}
+            />
           </div>
         )}
         {description && (

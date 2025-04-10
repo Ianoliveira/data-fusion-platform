@@ -13,13 +13,13 @@ export const SparklineChart: React.FC<{
   data,
   dataKey,
   color = "#3b82f6",
-  height = 30,
+  height = 50,  // Increased default height
   className,
 }) => {
   return (
-    <div className={className} style={{ height: `${height}px` }}>
-      <NeoChartContainer className="p-0">
-        <RechartsPrimitive.LineChart data={data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+    <div className={className} style={{ height: `${height}px`, minHeight: `${height}px` }}>
+      <NeoChartContainer className="p-0 w-full h-full">
+        <RechartsPrimitive.LineChart data={data} margin={{ top: 2, right: 2, left: 2, bottom: 2 }}>
           <RechartsPrimitive.Line
             type="monotone"
             dataKey={dataKey}

@@ -47,7 +47,7 @@ export function NeoChartContainer({
   // The key fix - we need to ensure we pass a React element to ChartContainer
   return (
     <div className={cn(variantStyles[variant], className)}>
-      <ChartContainer config={config} className="p-2">
+      <ChartContainer config={config} className="p-2 w-full h-full">
         {React.isValidElement(wrappedChildren) ? wrappedChildren : <React.Fragment>{wrappedChildren}</React.Fragment>}
       </ChartContainer>
     </div>
@@ -63,7 +63,7 @@ export function EnhancedResponsiveContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("w-full h-full", className)}>
+    <div className={cn("w-full h-full min-h-[200px]", className)}>
       <RechartsPrimitive.ResponsiveContainer width="100%" height="100%" {...props}>
         {children}
       </RechartsPrimitive.ResponsiveContainer>
@@ -107,8 +107,8 @@ export function ShimmerChartContainer({
   }
   
   return (
-    <div className={cn("rounded-2xl bg-white dark:bg-apple-gray-dark shadow-apple-card", className)}>
-      {wrappedChildren}
+    <div className={cn("rounded-2xl bg-white dark:bg-apple-gray-dark shadow-apple-card w-full h-full", className)}>
+      {React.isValidElement(wrappedChildren) ? wrappedChildren : <React.Fragment>{wrappedChildren}</React.Fragment>}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { PieChart, BarChart } from "@/components/ui/chart";
 
 export function InsightDistributionChart() {
   return (
-    <Card variant="neo">
+    <Card variant="neo" className="min-h-[450px]">
       <CardHeader>
         <CardTitle>Distribuição de Insights</CardTitle>
         <CardDescription>Por categoria e prioridade</CardDescription>
@@ -19,7 +19,7 @@ export function InsightDistributionChart() {
           </TabsList>
           
           <TabsContent value="category">
-            <div className="h-[300px] w-full">
+            <div className="h-[350px] w-full">
               <PieChart
                 data={[
                   { name: "Oportunidades", value: 23 },
@@ -30,13 +30,13 @@ export function InsightDistributionChart() {
                 index="name"
                 colors={["#10b981", "#ef4444", "#3b82f6"]}
                 valueFormatter={(value) => `${value} insights`}
-                className="h-[300px]"
+                className="h-[350px]"
               />
             </div>
           </TabsContent>
           
           <TabsContent value="priority">
-            <div className="h-[300px] w-full">
+            <div className="h-[350px] w-full">
               <BarChart
                 data={[
                   { name: "Alta", value: 16 },
@@ -47,7 +47,7 @@ export function InsightDistributionChart() {
                 index="name"
                 colors={["#ef4444"]}
                 valueFormatter={(value) => `${value} insights`}
-                className="h-[300px]"
+                className="h-[350px]"
               />
             </div>
           </TabsContent>

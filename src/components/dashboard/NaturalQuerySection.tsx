@@ -133,7 +133,7 @@ export function NaturalQuerySection() {
             </div>
             
             {result.type === 'chart' && result.data && (
-              <div className="h-[300px]">
+              <div className="h-[400px]">
                 {result.title.includes('ROI') ? (
                   <AreaChart
                     data={result.data}
@@ -141,7 +141,7 @@ export function NaturalQuerySection() {
                     index="name"
                     colors={["#3b82f6", "#8b5cf6", "#f43f5e"]}
                     valueFormatter={(value) => `${value}x`}
-                    className="h-[300px]"
+                    className="h-[400px]"
                   />
                 ) : (
                   <BarChart
@@ -150,7 +150,7 @@ export function NaturalQuerySection() {
                     index="name"
                     colors={["#3b82f6", "#8b5cf6", "#f43f5e"]}
                     valueFormatter={(value) => `R$ ${value}`}
-                    className="h-[300px]"
+                    className="h-[400px]"
                   />
                 )}
               </div>

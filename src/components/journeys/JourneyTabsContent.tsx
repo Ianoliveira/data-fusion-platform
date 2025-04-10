@@ -66,23 +66,25 @@ export const JourneyTabContent: React.FC<JourneyTabContentProps> = ({
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Card variant="apple">
+        <Card variant="apple" className="min-h-[400px]">
           <CardHeader>
             <CardTitle>{title}</CardTitle>
             <CardDescription>Evolução mensal de métricas importantes</CardDescription>
           </CardHeader>
-          <CardContent>
-            <AreaChart
-              data={chartData}
-              categories={chartCategories}
-              index="name"
-              colors={chartColors}
-              valueFormatter={(value) => `${value}`}
-              className="h-[300px]"
-            />
+          <CardContent className="min-h-[320px]">
+            <div className="h-full w-full min-h-[320px]">
+              <AreaChart
+                data={chartData}
+                categories={chartCategories}
+                index="name"
+                colors={chartColors}
+                valueFormatter={(value) => `${value}`}
+                className="h-[320px]"
+              />
+            </div>
           </CardContent>
         </Card>
-        <Card variant="apple">
+        <Card variant="apple" className="min-h-[400px]">
           <CardHeader>
             <CardTitle>Métricas Adicionais</CardTitle>
             <CardDescription>Informações detalhadas sobre {title.toLowerCase()}</CardDescription>
