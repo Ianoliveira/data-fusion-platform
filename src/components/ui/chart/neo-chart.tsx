@@ -28,9 +28,14 @@ export function NeoChartContainer({
       return children;
     }
     
-    // If it's a function (render prop pattern), it should return a valid element
+    // If it's a function (render prop pattern), execute it only if it's actually a function
     if (typeof children === 'function') {
-      return children();
+      try {
+        return children();
+      } catch (e) {
+        console.error('Error calling children as function:', e);
+        return <React.Fragment>{children}</React.Fragment>;
+      }
     }
     
     // Otherwise, wrap it in a fragment (this handles strings, arrays, etc.)
@@ -80,7 +85,12 @@ export function ShimmerChartContainer({
     }
     
     if (typeof children === 'function') {
-      return children();
+      try {
+        return children();
+      } catch (e) {
+        console.error('Error calling children as function:', e);
+        return <React.Fragment>{children}</React.Fragment>;
+      }
     }
     
     return <React.Fragment>{children}</React.Fragment>;
