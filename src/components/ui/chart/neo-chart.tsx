@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import * as RechartsPrimitive from "recharts"
 import { cn } from "@/lib/utils"
@@ -43,10 +44,11 @@ export function NeoChartContainer({
     return <React.Fragment>{children}</React.Fragment>;
   }, [children]);
 
+  // The key fix - we need to ensure we pass a React element to ChartContainer
   return (
     <div className={cn(variantStyles[variant], className)}>
       <ChartContainer config={config} className="p-2">
-        {wrappedChildren}
+        {React.isValidElement(wrappedChildren) ? wrappedChildren : <React.Fragment>{wrappedChildren}</React.Fragment>}
       </ChartContainer>
     </div>
   );
