@@ -24,7 +24,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[400px] w-full">
+      <div className="h-[450px] w-full">
         <Tabs defaultValue="roi">
           <TabsList className="mb-4">
             <TabsTrigger value="roi">ROI Marketing</TabsTrigger>
@@ -32,7 +32,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
             <TabsTrigger value="social">Redes Sociais</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="roi" className="h-[350px]">
+          <TabsContent value="roi" className="h-[400px]">
             <div className="h-full w-full">
               <BarChart
                 data={marketingROIData}
@@ -44,7 +44,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="revenue" className="h-[350px]">
+          <TabsContent value="revenue" className="h-[400px]">
             <div className="h-full w-full">
               <LineChart
                 data={quarterlyRevenueData}
@@ -56,8 +56,8 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="social" className="h-[350px]">
-            <ScrollArea className="h-[350px]">
+          <TabsContent value="social" className="h-[400px]">
+            <ScrollArea className="h-[400px]">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -97,7 +97,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
                 </div>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <div className="h-[150px] w-[150px] mx-auto">
+                <div className="h-[180px] w-[180px] mx-auto">
                   <GaugeChart
                     value={72}
                     min={0}
@@ -118,7 +118,7 @@ export const PerformanceView: React.FC<PerformanceViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Valor do Cliente</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[200px] w-full">
+            <div className="h-[250px] w-full">
               <TreeMapChart
                 data={[
                   { name: "Alto valor", value: 45 },

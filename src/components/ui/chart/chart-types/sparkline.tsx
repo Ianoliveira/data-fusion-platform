@@ -13,7 +13,7 @@ export const SparklineChart: React.FC<{
   data,
   dataKey,
   color = "#3b82f6",
-  height = 50,  // Increased default height
+  height = 50,  // Default height
   className,
 }) => {
   return (

@@ -28,7 +28,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[400px]">
+      <div className="h-[450px] w-full">
         <Tabs defaultValue="pie">
           <TabsList className="mb-4">
             <TabsTrigger value="pie">Gráfico de Pizza</TabsTrigger>
@@ -36,7 +36,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <TabsTrigger value="radar">Radar de Interesses</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="pie" className="h-[350px]">
+          <TabsContent value="pie" className="h-[400px]">
             <div className="h-full w-full">
               <PieChart
                 data={deviceData}
@@ -48,7 +48,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="donut" className="h-[350px]">
+          <TabsContent value="donut" className="h-[400px]">
             <div className="h-full w-full">
               <DonutChart
                 data={deviceData}
@@ -60,7 +60,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="radar" className="h-[350px]">
+          <TabsContent value="radar" className="h-[400px]">
             <div className="h-full w-full">
               <RadarChart
                 data={customerInterestsData}
@@ -80,7 +80,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Demografia de Usuários</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
+            <div className="h-[320px] w-full">
               <BarChart
                 data={demoData}
                 categories={["Homens", "Mulheres"]}
@@ -97,7 +97,7 @@ export const DevicesView: React.FC<DevicesViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Taxa de Conversão por Dispositivo</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
+            <div className="h-[320px] w-full">
               <BarChart
                 data={conversionByDeviceData}
                 categories={["Taxa"]}

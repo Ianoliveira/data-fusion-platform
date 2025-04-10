@@ -29,7 +29,7 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[400px] w-full">
+      <div className="h-[450px] w-full">
         <Tabs defaultValue="funnel">
           <TabsList className="mb-4">
             <TabsTrigger value="funnel">Funil de Conversão</TabsTrigger>
@@ -37,7 +37,7 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
             <TabsTrigger value="goals">Metas</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="funnel" className="h-[350px]">
+          <TabsContent value="funnel" className="h-[400px]">
             <div className="h-full w-full">
               <FunnelChart
                 data={conversionData}
@@ -49,7 +49,7 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="journey" className="h-[350px]">
+          <TabsContent value="journey" className="h-[400px]">
             <div className="h-full w-full">
               <FunnelChart
                 data={customerJourneyData}
@@ -61,7 +61,7 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="goals" className="h-[350px]">
+          <TabsContent value="goals" className="h-[400px]">
             <div className="h-full w-full">
               <BarChart
                 data={goalCompletionData}
@@ -81,7 +81,7 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
             <CardTitle className="text-lg">A/B Testing</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
+            <div className="h-[320px] w-full">
               <BarChart
                 data={abTestData}
                 categories={["conversão", "tempo", "rejeição"]}
@@ -98,7 +98,7 @@ export const ConversionView: React.FC<ConversionViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Valor Médio de Pedido</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
+            <div className="h-[320px] w-full">
               <LineChart
                 data={averageOrderData}
                 categories={["value"]}

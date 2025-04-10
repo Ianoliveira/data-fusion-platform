@@ -32,7 +32,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
 
   return (
     <div className="space-y-8">
-      <div className="h-[400px] w-full">
+      <div className="h-[450px] w-full">
         <Tabs defaultValue="satisfaction">
           <TabsList className="mb-4">
             <TabsTrigger value="satisfaction">Satisfação</TabsTrigger>
@@ -40,7 +40,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <TabsTrigger value="nps">NPS</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="satisfaction" className="h-[350px]">
+          <TabsContent value="satisfaction" className="h-[400px]">
             <div className="h-full w-full">
               <BarChart
                 data={satisfactionMetrics}
@@ -52,7 +52,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="journey" className="h-[350px]">
+          <TabsContent value="journey" className="h-[400px]">
             <div className="h-full w-full">
               <FunnelChart
                 data={customerJourneyData}
@@ -64,7 +64,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             </div>
           </TabsContent>
           
-          <TabsContent value="nps" className="h-[350px]">
+          <TabsContent value="nps" className="h-[400px]">
             <div className="h-full w-full">
               <LineChart
                 data={npsData}
@@ -84,7 +84,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Áreas de Interesse</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="h-[300px] w-full">
+            <div className="h-[320px] w-full">
               <RadarChart
                 data={customerInterestsData}
                 categories={["A", "B", "C"]}
@@ -101,7 +101,7 @@ export const CustomerView: React.FC<CustomerViewProps> = ({ data }) => {
             <CardTitle className="text-lg">Performance de Produtos</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <ScrollArea className="h-[300px]">
+            <ScrollArea className="h-[320px]">
               <Table>
                 <TableHeader>
                   <TableRow>

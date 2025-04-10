@@ -22,7 +22,7 @@ const SmartInsights = () => {
             <RecentInsightsPanel />
           </div>
           
-          <div>
+          <div className="h-full">
             <InsightDistributionChart />
           </div>
         </div>
