@@ -22,3 +22,11 @@ export const socialMediaData = [
   { name: "YouTube", followers: 2340, engagement: 4.5, clicks: 512 }
 ];
 
+// Add the missing productPerformanceData
+export const productPerformanceData = [
+  { name: "Vestido Floral", vendas: 256, reviews: 4.8, recompra: 72 },
+  { name: "Calça Jeans Slim", vendas: 189, reviews: 4.5, recompra: 65 },
+  { name: "Blusa de Seda", vendas: 145, reviews: 4.7, recompra: 68 },
+  { name: "Blazer Estruturado", vendas: 98, reviews: 4.2, recompra: 54 },
+  { name: "Saia Midi Plissada", vendas: 112, reviews: 4.6, recompra: 62 }
+];

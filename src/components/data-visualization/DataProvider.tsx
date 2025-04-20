@@ -68,4 +68,3 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     </DataContext.Provider>
   );
 };
-
