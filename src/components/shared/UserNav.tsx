@@ -1,8 +1,8 @@
-
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, Transition } from '@headlessui/react';
 import { LogOut, User, Settings, HelpCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const userNavItems = [
   { icon: User, label: "Perfil", link: "/profile" },
@@ -11,6 +11,13 @@ const userNavItems = [
 ];
 
 export function UserNav() {
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate('/auth');
+  };
+
   return (
     <Menu as="div" className="relative">
       <Menu.Button className="flex rounded-full bg-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -63,6 +70,7 @@ export function UserNav() {
           <Menu.Item>
             {({ active }) => (
               <button
+                onClick={handleSignOut}
                 className={`${
                   active ? 'bg-gray-100' : ''
                 } flex w-full items-center px-4 py-2 text-sm text-gray-700`}
