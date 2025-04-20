@@ -17,51 +17,79 @@ export default function Auth() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+    
     setLoading(true);
     setError(null);
     
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error.message,
+    try {
+      const { data, error: signupError } = await supabase.auth.signUp({
+        email,
+        password,
       });
-    } else {
-      toast({
-        title: "Success",
-        description: "Check your email for the confirmation link",
-      });
+  
+      if (signupError) {
+        setError(signupError.message);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: signupError.message,
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "Check your email for the confirmation link",
+        });
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+    
     setLoading(true);
     setError(null);
     
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: error.message,
+    try {
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-    } else {
-      navigate('/');
+  
+      if (signInError) {
+        setError(signInError.message);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: signInError.message,
+        });
+      } else if (data.user) {
+        toast({
+          title: "Success",
+          description: "Successfully signed in!",
+        });
+        navigate('/');
+      }
+    } catch (err) {
+      console.error("Signin error:", err);
+      setError("An unexpected error occurred");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
@@ -78,7 +106,7 @@ export default function Auth() {
           </Alert>
         )}
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSignIn}>
           <div className="space-y-2">
             <Input
               type="email"
@@ -86,6 +114,7 @@ export default function Auth() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
+              required
             />
           </div>
           <div className="space-y-2">
@@ -95,12 +124,13 @@ export default function Auth() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
+              required
             />
           </div>
           <div className="space-y-4 pt-2">
             <Button
               className="w-full"
-              onClick={handleSignIn}
+              type="submit"
               disabled={loading}
             >
               {loading ? 'Loading...' : 'Sign In'}
@@ -108,6 +138,7 @@ export default function Auth() {
             <Button
               className="w-full"
               variant="outline"
+              type="button"
               onClick={handleSignUp}
               disabled={loading}
             >
