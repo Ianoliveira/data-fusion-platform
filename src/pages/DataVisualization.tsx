@@ -80,32 +80,32 @@ const DataVisualizationContent: React.FC = () => {
 
   const getViewTitle = () => {
     switch (activeView) {
-      case "traffic": return "Análise de Tráfego";
-      case "devices": return "Distribuição de Dispositivos";
-      case "conversion": return "Funil de Conversão";
-      case "pages": return "Desempenho de Páginas";
-      case "customer": return "Análise de Cliente";
-      case "performance": return "Análise de Performance";
-      default: return "Análise de Tráfego";
+      case "traffic": return "Análise de Visitas à Loja";
+      case "devices": return "Canais de Compra";
+      case "conversion": return "Análise de Vendas";
+      case "pages": return "Desempenho do Catálogo";
+      case "customer": return "Análise de Clientes";
+      case "performance": return "Performance da Coleção";
+      default: return "Análise de Visitas à Loja";
     }
   };
 
   const getViewDescription = () => {
     switch (activeView) {
-      case "traffic": return "Visualização de sessões e usuários ao longo do tempo";
-      case "devices": return "Distribuição percentual de acessos por tipo de dispositivo";
-      case "conversion": return "Taxa de conversão em cada etapa do funil de vendas";
-      case "pages": return "Ranking das páginas mais acessadas do site";
-      case "customer": return "Análise da jornada do cliente e métricas de satisfação";
-      case "performance": return "ROI e métricas de desempenho de campanhas e produtos";
-      default: return "Visualização de sessões e usuários ao longo do tempo";
+      case "traffic": return "Análise detalhada do tráfego e comportamento dos visitantes na loja";
+      case "devices": return "Distribuição de acessos e vendas por canal (Desktop, Mobile, App)";
+      case "conversion": return "Métricas de conversão e análise do funil de vendas";
+      case "pages": return "Performance dos produtos e categorias mais acessadas";
+      case "customer": return "Perfil dos clientes, comportamento de compra e preferências";
+      case "performance": return "Métricas de desempenho da coleção e ROI por categoria";
+      default: return "Análise detalhada do tráfego e comportamento dos visitantes na loja";
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>Visualização de Dados - Twiggy.ai</title>
+        <title>Analytics de Moda - Twiggy.ai</title>
       </Helmet>
       
       <div className="space-y-6">

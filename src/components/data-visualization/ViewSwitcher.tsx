@@ -2,12 +2,12 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
-  ChartLine,
-  PieChart,
+  Shirt,
+  ShoppingBag,
   BarChart3,
-  ChartBar,
-  ChartPie,
-  ChartArea
+  Image,
+  Users,
+  Package
 } from "lucide-react";
 
 interface ViewOption {
@@ -26,39 +26,39 @@ export const ViewSwitcher: React.FC<ViewSwitcherProps> = ({ activeView, onViewCh
   const viewOptions: ViewOption[] = [
     {
       id: "traffic",
-      title: "Tráfego",
-      description: "Análise de sessões e usuários",
-      icon: <ChartLine className="h-4 w-4" />
+      title: "Visitas à Loja",
+      description: "Análise de tráfego e navegação",
+      icon: <Users className="h-4 w-4" />
     },
     {
       id: "devices",
-      title: "Dispositivos",
-      description: "Distribuição por tipo de dispositivo",
-      icon: <PieChart className="h-4 w-4" />
+      title: "Canais de Compra",
+      description: "Desktop, Mobile e App",
+      icon: <Package className="h-4 w-4" />
     },
     {
       id: "conversion",
-      title: "Conversão",
-      description: "Funil de conversão de vendas",
-      icon: <BarChart3 className="h-4 w-4" />
+      title: "Vendas",
+      description: "Funil de conversão e pedidos",
+      icon: <ShoppingBag className="h-4 w-4" />
     },
     {
       id: "pages",
-      title: "Páginas",
-      description: "Análise de desempenho de páginas",
-      icon: <ChartBar className="h-4 w-4" />
+      title: "Catálogo",
+      description: "Desempenho dos produtos",
+      icon: <Image className="h-4 w-4" />
     },
     {
       id: "customer",
-      title: "Cliente",
-      description: "Jornada e satisfação de cliente",
-      icon: <ChartPie className="h-4 w-4" />
+      title: "Clientes",
+      description: "Perfil e comportamento",
+      icon: <Shirt className="h-4 w-4" />
     },
     {
       id: "performance",
       title: "Performance",
-      description: "Análise de ROI e resultados",
-      icon: <ChartArea className="h-4 w-4" />
+      description: "ROI e métricas de coleção",
+      icon: <BarChart3 className="h-4 w-4" />
     }
   ];
 
