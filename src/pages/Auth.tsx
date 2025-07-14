@@ -10,16 +10,18 @@ import { useToast } from '@/components/ui/use-toast';
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isSignUp, setIsSignUp] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !password) {
-      setError("Email and password are required");
+    if (!email || !password || !fullName) {
+      setError("Nome completo, email e senha são obrigatórios");
       return;
     }
     
@@ -30,24 +32,29 @@ export default function Auth() {
       const { data, error: signupError } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            full_name: fullName
+          }
+        }
       });
   
       if (signupError) {
         setError(signupError.message);
         toast({
           variant: "destructive",
-          title: "Error",
+          title: "Erro",
           description: signupError.message,
         });
       } else {
         toast({
-          title: "Success",
-          description: "Check your email for the confirmation link",
+          title: "Sucesso",
+          description: "Verifique seu email para confirmar a conta",
         });
       }
     } catch (err) {
       console.error("Signup error:", err);
-      setError("An unexpected error occurred");
+      setError("Ocorreu um erro inesperado");
     } finally {
       setLoading(false);
     }
@@ -57,7 +64,7 @@ export default function Auth() {
     e.preventDefault();
     
     if (!email || !password) {
-      setError("Email and password are required");
+      setError("Email e senha são obrigatórios");
       return;
     }
     
@@ -74,19 +81,19 @@ export default function Auth() {
         setError(signInError.message);
         toast({
           variant: "destructive",
-          title: "Error",
+          title: "Erro",
           description: signInError.message,
         });
       } else if (data.user) {
         toast({
-          title: "Success",
-          description: "Successfully signed in!",
+          title: "Sucesso",
+          description: "Login realizado com sucesso!",
         });
         navigate('/');
       }
     } catch (err) {
       console.error("Signin error:", err);
-      setError("An unexpected error occurred");
+      setError("Ocorreu um erro inesperado");
     } finally {
       setLoading(false);
     }
@@ -96,8 +103,15 @@ export default function Auth() {
     <div className="min-h-screen flex items-center justify-center bg-secondary/20">
       <div className="w-full max-w-md p-8 space-y-6 bg-background rounded-xl shadow-neo-button-light dark:shadow-neo-button-dark">
         <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-bold tracking-tight">Welcome to DataFusion</h1>
-          <p className="text-muted-foreground">Enter your email below to create your account or sign in</p>
+          <h1 className="text-2xl font-bold tracking-tight">
+            {isSignUp ? 'Criar Conta' : 'Entrar no DataFusion'}
+          </h1>
+          <p className="text-muted-foreground">
+            {isSignUp 
+              ? 'Preencha os dados abaixo para criar sua conta'
+              : 'Entre com seu email e senha'
+            }
+          </p>
         </div>
 
         {error && (
@@ -106,7 +120,19 @@ export default function Auth() {
           </Alert>
         )}
 
-        <form className="space-y-4" onSubmit={handleSignIn}>
+        <form className="space-y-4" onSubmit={isSignUp ? handleSignUp : handleSignIn}>
+          {isSignUp && (
+            <div className="space-y-2">
+              <Input
+                type="text"
+                placeholder="Nome completo"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                disabled={loading}
+                required
+              />
+            </div>
+          )}
           <div className="space-y-2">
             <Input
               type="email"
@@ -120,7 +146,7 @@ export default function Auth() {
           <div className="space-y-2">
             <Input
               type="password"
-              placeholder="Password"
+              placeholder="Senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
@@ -133,16 +159,16 @@ export default function Auth() {
               type="submit"
               disabled={loading}
             >
-              {loading ? 'Loading...' : 'Sign In'}
+              {loading ? 'Carregando...' : (isSignUp ? 'Criar Conta' : 'Entrar')}
             </Button>
             <Button
               className="w-full"
               variant="outline"
               type="button"
-              onClick={handleSignUp}
+              onClick={() => setIsSignUp(!isSignUp)}
               disabled={loading}
             >
-              Create Account
+              {isSignUp ? 'Já tem conta? Entrar' : 'Criar nova conta'}
             </Button>
           </div>
         </form>

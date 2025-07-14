@@ -1,4 +1,5 @@
-import { Fragment } from "react";
+
+import { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Transition } from '@headlessui/react';
 import { LogOut, User, Settings, HelpCircle } from "lucide-react";
@@ -10,8 +11,38 @@ const userNavItems = [
   { icon: HelpCircle, label: "Ajuda & Suporte", link: "#" },
 ];
 
+interface UserProfile {
+  full_name?: string;
+  company?: string;
+}
+
 export function UserNav() {
   const navigate = useNavigate();
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        setUserEmail(user.email || "");
+        
+        // Fetch user profile from our profiles table
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('full_name, company')
+          .eq('id', user.id)
+          .single();
+        
+        if (profile) {
+          setUserProfile(profile);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -44,8 +75,17 @@ export function UserNav() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="px-4 py-3">
-            <p className="text-sm font-medium text-gray-900">Gestor Demo</p>
-            <p className="truncate text-xs text-gray-500">gestor@twiggy.ai</p>
+            <p className="text-sm font-medium text-gray-900">
+              {userProfile?.full_name || "Usuário"}
+            </p>
+            <p className="truncate text-xs text-gray-500">
+              {userEmail}
+            </p>
+            {userProfile?.company && (
+              <p className="truncate text-xs text-gray-400">
+                {userProfile.company}
+              </p>
+            )}
           </div>
           <div className="border-t border-gray-200" />
           
