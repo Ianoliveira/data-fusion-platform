@@ -4,9 +4,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, TrendingUp, TrendingDown, AlertTriangle } from "lucide-react";
-import { recentInsights } from "@/data/mockData";
 
-export function RecentInsightsPanel() {
+interface Insight {
+  id: string;
+  category: string;
+  priority: string;
+  title: string;
+  description: string;
+  created_at: string;
+  status: string;
+  user_id: string;
+  data: any;
+}
+
+interface RecentInsightsPanelProps {
+  insights: Insight[];
+}
+
+export function RecentInsightsPanel({ insights }: RecentInsightsPanelProps) {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case "opportunity":
@@ -72,6 +87,41 @@ export function RecentInsightsPanel() {
     }
   };
 
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  // Show most recent insights first
+  const recentInsights = insights
+    .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+    .slice(0, 5);
+
+  if (recentInsights.length === 0) {
+    return (
+      <Card variant="neo">
+        <CardHeader>
+          <CardTitle>Insights Recentes</CardTitle>
+          <CardDescription>
+            Análises e recomendações geradas nos últimos 7 dias
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">
+              Nenhum insight encontrado. Conecte suas integrações para começar a gerar insights.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card variant="neo">
       <CardHeader>
@@ -96,7 +146,7 @@ export function RecentInsightsPanel() {
                     Prioridade: {getPriorityText(insight.priority)}
                   </Badge>
                 </div>
-                <span className="text-xs text-muted-foreground">{insight.timestamp}</span>
+                <span className="text-xs text-muted-foreground">{formatDate(insight.created_at)}</span>
               </div>
               <h3 className="mt-2 font-semibold">{insight.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{insight.description}</p>
